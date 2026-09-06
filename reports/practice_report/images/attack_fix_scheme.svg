@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 280" width="100%" height="100%">
+  <defs>
+    <marker id="arrow-black" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 1 L 7 4 L 0 7 z" fill="#2c3e50" />
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M 0 1 L 7 4 L 0 7 z" fill="#2e7d32" />
+    </marker>
+  </defs>
+
+  <!-- Left Column: Attack Nodes -->
+  <!-- Node 1: SSH -->
+  <rect x="20" y="20" width="220" height="58" rx="5" fill="#fdf2f2" stroke="#d32f2f" stroke-width="1.5" />
+  <text x="130" y="44" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#b71c1c" text-anchor="middle">SSH Server 10.10.1.31</text>
+  <text x="130" y="62" font-family="'Times New Roman', serif" font-size="11" fill="#555" text-anchor="middle">слабый доступ, cron</text>
+
+  <!-- Node 2: Cacti -->
+  <rect x="20" y="110" width="220" height="58" rx="5" fill="#fdf2f2" stroke="#d32f2f" stroke-width="1.5" />
+  <text x="130" y="134" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#b71c1c" text-anchor="middle">Cacti 10.10.2.32</text>
+  <text x="130" y="152" font-family="'Times New Roman', serif" font-size="11" fill="#555" text-anchor="middle">тестовый device, sudoers</text>
+
+  <!-- Node 3: PostgreSQL -->
+  <rect x="20" y="200" width="220" height="58" rx="5" fill="#fdf2f2" stroke="#d32f2f" stroke-width="1.5" />
+  <text x="130" y="224" font-family="'Times New Roman', serif" font-size="13" font-weight="bold" fill="#b71c1c" text-anchor="middle">PostgreSQL 10.10.2.26</text>
+  <text x="130" y="242" font-family="'Times New Roman', serif" font-size="11" fill="#555" text-anchor="middle">открытый доступ, удаление БД</text>
+
+  <!-- Vertical Arrows (Attack Progression) -->
+  <line x1="130" y1="78" x2="130" y2="108" stroke="#2c3e50" stroke-width="1.5" marker-end="url(#arrow-black)" />
+  <text x="120" y="96" font-family="'Times New Roman', serif" font-size="10.5" fill="#2c3e50" text-anchor="end">развитие доступа</text>
+
+  <line x1="130" y1="168" x2="130" y2="198" stroke="#2c3e50" stroke-width="1.5" marker-end="url(#arrow-black)" />
+  <text x="120" y="186" font-family="'Times New Roman', serif" font-size="10.5" fill="#2c3e50" text-anchor="end">подключение к БД</text>
+
+  <!-- Right Column: Remediation Nodes -->
+  <!-- Fix 1: SSH -->
+  <rect x="360" y="20" width="240" height="58" rx="5" fill="#f1f8e9" stroke="#388e3c" stroke-width="1.5" />
+  <text x="480" y="39" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">Смена пароля</text>
+  <text x="480" y="54" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">проверка cron</text>
+  <text x="480" y="69" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">ограничение SSH</text>
+
+  <!-- Fix 2: Cacti -->
+  <rect x="360" y="110" width="240" height="58" rx="5" fill="#f1f8e9" stroke="#388e3c" stroke-width="1.5" />
+  <text x="480" y="129" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">Удаление device</text>
+  <text x="480" y="144" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">восстановление sudoers</text>
+  <text x="480" y="159" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">перезапуск сервиса</text>
+
+  <!-- Fix 3: PostgreSQL -->
+  <rect x="360" y="200" width="240" height="58" rx="5" fill="#f1f8e9" stroke="#388e3c" stroke-width="1.5" />
+  <text x="480" y="219" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">Восстановление demo</text>
+  <text x="480" y="234" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">pg_hba.conf</text>
+  <text x="480" y="249" font-family="'Times New Roman', serif" font-size="11.5" fill="#1b5e20" text-anchor="middle">listen_addresses=localhost</text>
+
+  <!-- Horizontal Remediation Arrows -->
+  <line x1="240" y1="49" x2="358" y2="49" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-green)" />
+  <text x="300" y="42" font-family="'Times New Roman', serif" font-size="11" fill="#2e7d32" text-anchor="middle">устранение</text>
+
+  <line x1="240" y1="139" x2="358" y2="139" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-green)" />
+  <text x="300" y="132" font-family="'Times New Roman', serif" font-size="11" fill="#2e7d32" text-anchor="middle">устранение</text>
+
+  <line x1="240" y1="229" x2="358" y2="229" stroke="#2e7d32" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrow-green)" />
+  <text x="300" y="222" font-family="'Times New Roman', serif" font-size="11" fill="#2e7d32" text-anchor="middle">устранение</text>
+</svg>

@@ -1,0 +1,13 @@
+# Temporary previews generated during editing
+.codex_preview/
+
+# Common local/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+
+# Python cache
+__pycache__/
+*.py[cod]

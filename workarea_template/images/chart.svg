@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 240" width="100%">
+  <!-- Сетка графика -->
+  <line x1="70" y1="35" x2="490" y2="35" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="70" y1="75" x2="490" y2="75" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="70" y1="115" x2="490" y2="115" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="70" y1="155" x2="490" y2="155" stroke="#ccc" stroke-width="0.7"/>
+  
+  <line x1="175" y1="35" x2="175" y2="195" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="280" y1="35" x2="280" y2="195" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="385" y1="35" x2="385" y2="195" stroke="#ccc" stroke-width="0.7"/>
+  <line x1="490" y1="35" x2="490" y2="195" stroke="#ccc" stroke-width="0.7"/>
+
+  <!-- Оси координат без стрелок -->
+  <line x1="70" y1="195" x2="490" y2="195" stroke="#000" stroke-width="1.3"/>
+  <line x1="70" y1="35" x2="70" y2="195" stroke="#000" stroke-width="1.3"/>
+
+  <!-- Подпись вертикальной оси: слева сверху -->
+  <text x="60" y="24" font-family="Times New Roman" font-size="14" text-anchor="end">I, А</text>
+  <!-- Метки вертикальной оси -->
+  <text x="62" y="199" font-family="Times New Roman" font-size="12" text-anchor="end">0</text>
+  <text x="62" y="159" font-family="Times New Roman" font-size="12" text-anchor="end">100</text>
+  <text x="62" y="119" font-family="Times New Roman" font-size="12" text-anchor="end">200</text>
+  <text x="62" y="79" font-family="Times New Roman" font-size="12" text-anchor="end">300</text>
+  <text x="62" y="39" font-family="Times New Roman" font-size="12" text-anchor="end">400</text>
+
+  <!-- Подпись горизонтальной оси: справа снизу -->
+  <text x="505" y="214" font-family="Times New Roman" font-size="14">t, с</text>
+  <!-- Метки горизонтальной оси -->
+  <text x="70" y="212" font-family="Times New Roman" font-size="12" text-anchor="middle">0,0</text>
+  <text x="175" y="212" font-family="Times New Roman" font-size="12" text-anchor="middle">0,5</text>
+  <text x="280" y="212" font-family="Times New Roman" font-size="12" text-anchor="middle">1,0</text>
+  <text x="385" y="212" font-family="Times New Roman" font-size="12" text-anchor="middle">1,5</text>
+  <text x="490" y="212" font-family="Times New Roman" font-size="12" text-anchor="middle">2,0</text>
+
+  <!-- Засечки на осях -->
+  <line x1="66" y1="155" x2="70" y2="155" stroke="#000" stroke-width="1.3"/>
+  <line x1="66" y1="115" x2="70" y2="115" stroke="#000" stroke-width="1.3"/>
+  <line x1="66" y1="75" x2="70" y2="75" stroke="#000" stroke-width="1.3"/>
+  <line x1="66" y1="35" x2="70" y2="35" stroke="#000" stroke-width="1.3"/>
+
+  <line x1="175" y1="195" x2="175" y2="199" stroke="#000" stroke-width="1.3"/>
+  <line x1="280" y1="195" x2="280" y2="199" stroke="#000" stroke-width="1.3"/>
+  <line x1="385" y1="195" x2="385" y2="199" stroke="#000" stroke-width="1.3"/>
+  <line x1="490" y1="195" x2="490" y2="199" stroke="#000" stroke-width="1.3"/>
+
+  <!-- Кривые -->
+  <path d="M 70 195 C 100 65, 140 38, 190 40 C 260 42, 320 108, 490 110" fill="none" stroke="#000" stroke-width="1.8"/>
+  <path d="M 70 195 C 110 95, 160 68, 210 70 C 280 72, 340 118, 490 120" fill="none" stroke="#000" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- Номера кривых -->
+  <text x="185" y="32" font-family="Times New Roman" font-size="12" font-style="italic">1</text>
+  <text x="215" y="85" font-family="Times New Roman" font-size="12" font-style="italic">2</text>
+</svg>
