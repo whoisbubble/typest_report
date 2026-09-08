@@ -11,3 +11,6 @@ desktop.ini
 # Python cache
 __pycache__/
 *.py[cod]
+
+# Generated documents
+*.pdf

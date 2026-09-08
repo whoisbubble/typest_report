@@ -5,6 +5,13 @@
 
 #let sur-appendix-prefix = state("sur-appendix-prefix", none)
 
+// Оглавление СУР. Заголовки структурных элементов передаются в обычном
+// регистре, а их прописное начертание на страницах задаётся ниже шаблоном.
+#let sur-outline() = outline(
+  title: [ОГЛАВЛЕНИЕ],
+  indent: 0.75cm,
+)
+
 #let sur-report(
   title: "НАЗВАНИЕ РАБОТЫ",
   work-type: "Курсовая работа", // Отчёт по практике: "отчёт о прохождении практики"
@@ -165,11 +172,17 @@
 
     // Формируем блок заголовка
     let h-body = if it.numbering == none {
-      // Структурные заголовки (СОДЕРЖАНИЕ, ВВЕДЕНИЕ, ЗАКЛЮЧЕНИЕ и т. п.)
+      // Структурные заголовки печатаются прописными, кроме списка источников.
+      // В оглавлении сохраняется исходный регистр: «Введение», «Заключение».
+      let displayed-body = if it.body == [Список использованных источников] {
+        it.body
+      } else {
+        upper(it.body)
+      }
       pagebreak(weak: true)
       align(center)[
         #block(width: 100%, above: 0pt, below: 28pt, sticky: true)[
-          #text(size: 14pt, weight: "bold")[#it.body]
+          #text(size: 14pt, weight: "bold")[#displayed-body]
         ]
       ]
     } else if it.level == 1 {
@@ -204,7 +217,9 @@
     h-body
   }
 
-  // 6. АВТОНУМЕРАЦИЯ ФИГУР ПО РАЗДЕЛАМ (Рисунок 1.1, Таблица 1.1 по п. 8.7, 8.8)
+  // 6. АВТОНУМЕРАЦИЯ ФИГУР ПО РАЗДЕЛАМ (Рисунок 1.1, Таблица 1.1 по пп. 8.7, 8.8).
+  // Для СУР исключения не указано, поэтому используется обязательная схема
+  // «номер раздела + порядковый номер внутри раздела».
   set figure(numbering: (..nums) => context {
     let number = nums.pos().last()
     let appendix-prefix = sur-appendix-prefix.get()
@@ -316,11 +331,11 @@
   counter(math.equation).update(0)
 
   // Невидимый заголовок нужен только для корректной записи приложения
-  // в автоматически формируемом содержании.
+  // в автоматически формируемом оглавлении.
   {
     show heading: it => none
     heading(numbering: none, outlined: true, bookmarked: true)[
-      ПРИЛОЖЕНИЕ #letter #title
+      Приложение #letter #title
     ]
   }
 
