@@ -16,11 +16,11 @@
 #show raw.where(block: true): set block(breakable: false)
 #show raw.where(block: true): set text(font: "Consolas", size: 9pt)
 #show raw.where(block: true): set par(first-line-indent: 0pt, leading: 0.35em, spacing: 0.35em)
-#let include-photos = false
+#let include-photos = true
 #let photo(path, caption-text) = {
   let present = include-photos
   figure(
-    if present { image(path, width: 85%) } else {
+    if present { image(path, width: 85%, height: 145mm, fit: "contain") } else {
       block(width: 100%, height: 58mm, stroke: 0.6pt, inset: 5mm)[
         #set par(first-line-indent: 0pt, justify: false)
         #align(center + horizon)[
@@ -260,8 +260,7 @@ DVGUPS BOD41IST
 дополняются двумя и одним пробелом соответственно. Я проверяю читаемость обеих строк, отсутствие посторонних символов,
 запуск после включения питания и отдельного сброса микроконтроллера.
 
-#photo("stand.jpg", [Общий вид подключённого лабораторного стенда])
-#photo("lcd.jpg", [Отображение имени, вуза и группы на LCD1602])
+#photo("work_result.png", [Отображение имени, вуза и группы на LCD1602])
 
 
 
