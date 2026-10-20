@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="220" viewBox="0 0 900 220">
+  <rect width="900" height="220" fill="white"/>
+  <g fill="white" stroke="black" stroke-width="2">
+    <rect x="20" y="55" width="220" height="110"/>
+    <rect x="340" y="55" width="220" height="110"/>
+    <rect x="660" y="55" width="220" height="110"/>
+  </g>
+  <g font-family="Times New Roman" font-size="27" fill="black" text-anchor="middle">
+    <text x="130" y="108">Исходные</text><text x="130" y="139">данные</text>
+    <text x="450" y="108">Обработка</text><text x="450" y="139">данных</text>
+    <text x="770" y="108">Результат</text>
+  </g>
+  <path d="M240 110 H325 M560 110 H645" fill="none" stroke="black" stroke-width="2"/>
+  <path d="M325 110 l-12 -7 v14 z M645 110 l-12 -7 v14 z" fill="black"/>
+</svg>

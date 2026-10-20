@@ -14,3 +14,20 @@ __pycache__/
 
 # Generated documents
 *.pdf
+!coursework/report.pdf
+!bachelor_thesis/report.pdf
+
+# Local source extraction and visual QA from template development
+tmp/contact_*.png
+tmp/*-final-table.png
+tmp/extract_standards.py
+tmp/inspect_standards.py
+tmp/qa_reports.py
+tmp/render_coursework/
+tmp/render_bachelor_thesis/
+tmp/source_pages/
+tmp/standards_text/
+tmp/student2027_audit/
+tmp/inspect_student2027.py
+tmp/student2027_scan.py
+tmp/test_two_consultants.typ
