@@ -14,7 +14,7 @@
 
 #let sur-report(
   title: "НАЗВАНИЕ РАБОТЫ",
-  work-type: "Практическая работа",
+  work-type: "Курсовая работа", // Отчёт по практике: "отчёт о прохождении практики"
   discipline: "Название дисциплины", // Или вид практики
   cipher: "КР 23.05.03.17.18.СО151ЛОК",
   department: "Кафедра «Цифровая индустрия и защита информации»",
@@ -92,11 +92,11 @@
     v(2.8cm)
 
     align(center)[
-      #set par(leading: 0.65em, spacing: 0pt, justify: false)
+      #set par(leading: 0.4em, spacing: 0pt, justify: false)
       #set text(hyphenate: false)
-      #block(text(size: 20pt)[#upper(title)], below: 10pt)
+      #block(text(size: 20pt)[#upper(title)], below: 6pt)
       #if work-type != "" and work-type != none [
-        #block(text(size: 18pt)[#work-type], below: 10pt)
+        #block(text(size: 18pt)[#work-type], below: 6pt)
       ]
       #if discipline != "" and discipline != none [
         #let resolved-discipline-label = if discipline-label == auto {
@@ -114,7 +114,7 @@
               [#resolved-discipline-label «#discipline»]
             }
           ],
-          below: 10pt,
+          below: 6pt,
         )
       ]
       #block(text(size: 20pt, hyphenate: false)[#cipher], below: 0pt)
@@ -134,30 +134,30 @@
     // Блок подписей студента и руководителя (по образцу кафедры ЦИиЗИ)
     align(left)[
       #grid(
-        columns: (auto, 1fr, 1fr, auto),
+        columns: (auto, 1fr, auto),
         column-gutter: 14pt,
-        row-gutter: 8pt,
-        align: (left + top, center + top, center + top, right + top),
+        row-gutter: 20pt,
+        align: (left + top, center + top, left + top),
 
         // Строка 1: Студент
-        [#text(size: 14pt)[Студент]],
-        signature-field("подпись"),
-        signature-field("дата"),
-        [#text(size: 14pt)[#student-name]],
+        [#text(size: 14pt)[Студент]], signature-field("(подпись, дата)"), [#text(size: 14pt)[#student-name]],
 
         // Строка 2: Руководитель
-        grid.cell(colspan: 4)[#text(size: 14pt)[Руководитель]],
-        [#if supervisor-title != "" and supervisor-title != none {
-          text(size: 14pt)[#supervisor-title]
-        }],
-        signature-field("подпись"),
-        signature-field("дата"),
+        [
+          #set par(leading: 0.25em)
+          #text(size: 14pt)[Руководитель]
+          #if supervisor-title != "" and supervisor-title != none [
+            \ #text(size: 14pt)[#supervisor-title]
+          ]
+        ],
+        signature-field("(подпись, дата)"),
         [#text(size: 14pt)[#supervisor-name]],
       )
     ]
 
     v(1fr)
-    align(center)[#text(size: 12pt)[#city – #year]]
+    // В п. 2.2 для СУР указан формат без тире: «Хабаровск 2022».
+    align(center)[#text(size: 12pt)[#city #year]]
   }
 
   pagebreak()
@@ -261,15 +261,15 @@
     ]
   }
 
-  // 8. РИСУНКИ: внешние интервалы 14 пт, от рисунка до подписи — 6 пт.
+  // 8. РИСУНКИ (п. 8.8): рисунок и подпись по центру; интервалы 14 пт.
   show figure.where(kind: image): set figure(supplement: [Рисунок])
   show figure.where(kind: image): set figure.caption(position: bottom)
   show figure.where(kind: image): it => {
     block(width: 100%, above: 14pt, below: 14pt)[
       #align(center)[#it.body]
       #if it.caption != none [
-        #v(6pt)
-        #block(width: 100%, above: 0pt)[
+        #v(14pt)
+        #block(width: 100%)[
           #set text(size: 12pt, hyphenate: false)
           #set par(justify: false, first-line-indent: 0cm, leading: 0.5em, spacing: 0.5em)
           #align(center)[#it.caption]
