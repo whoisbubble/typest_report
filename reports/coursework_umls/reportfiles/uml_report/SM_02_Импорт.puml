@@ -1,0 +1,22 @@
+@startuml
+!include common.puml
+title Диаграмма состояний задания ImportJob
+
+state "Ожидает\nQUEUED" as Queued
+state "Проверяется\nVALIDATING" as Validating
+state "Применяется\nAPPLYING" as Applying
+state "Успешно\nSUCCEEDED" as Succeeded
+state "Ошибка\nFAILED" as Failed
+
+[*] --> Queued : принять файл
+Queued --> Validating : захватить задание\n/ attempts++, lease
+Validating --> Applying : [файл корректен и доступ сохранён]
+Validating --> Failed : [ошибка данных или отказ доступа]
+Validating --> Queued : [временный сбой и attempts < 3]
+Applying --> Succeeded : commit данных, аудита и статуса
+Applying --> Queued : rollback\n[временный сбой и attempts < 3]
+Applying --> Failed : rollback\n[ошибка неустранима]
+Succeeded --> [*]
+Failed --> [*]
+@enduml
+

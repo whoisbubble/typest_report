@@ -1,0 +1,42 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Физическая модель классов сервера: доступ и кампании
+
+class AuthController <<NestJS controller>> {
+  +login(dto: LoginDto): SessionView
+  +logout(): void
+}
+class CampaignController <<NestJS controller>> {
+  +create(dto: CreateCampaignDto): CampaignView
+  +registerPublication(dto): PublicationView
+}
+class AuthService <<service>> {
+  +login(email, password): Session
+  +logout(sessionId): void
+}
+class CampaignService <<service>> {
+  +create(dto, actor): Campaign
+  +registerPublication(dto, actor): Publication
+}
+class AccessPolicy <<domain service>> {
+  +require(actor, action, resource): void
+}
+interface UserRepository
+interface CampaignRepository
+class TypeOrmUserRepository <<adapter>>
+class TypeOrmCampaignRepository <<adapter>>
+
+AuthController --> AuthService
+CampaignController --> CampaignService
+AuthService --> UserRepository
+CampaignService --> CampaignRepository
+CampaignService --> AccessPolicy
+TypeOrmUserRepository ..|> UserRepository
+TypeOrmCampaignRepository ..|> CampaignRepository
+
+AuthController -[hidden]right-> CampaignController
+AuthService -[hidden]right-> CampaignService
+UserRepository -[hidden]right-> CampaignRepository
+@enduml
+

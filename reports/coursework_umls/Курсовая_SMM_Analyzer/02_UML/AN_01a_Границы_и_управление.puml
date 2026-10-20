@@ -1,0 +1,35 @@
+@startuml
+!include common.puml
+left to right direction
+title Классы анализа: границы и управление
+
+package "Граничные классы" as Boundaries {
+  class "Рабочая панель" as Dashboard <<boundary>>
+  class "Страница импорта" as ImportPage <<boundary>>
+  class "Страница аналитики" as AnalyticsPage <<boundary>>
+  class "Страница отчёта" as ReportPage <<boundary>>
+}
+
+package "Управляющие классы" as Controls {
+  class "Управление кампанией" as CampaignControl <<control>>
+  class "Управление импортом" as ImportControl <<control>>
+  class "Управление анализом" as AnalysisControl <<control>>
+  class "Управление отчётом" as ReportControl <<control>>
+}
+
+class "Политика доступа" as AccessControl <<control>>
+
+Dashboard --> CampaignControl
+ImportPage --> ImportControl
+AnalyticsPage --> AnalysisControl
+ReportPage --> ReportControl
+Controls ..> AccessControl : проверка каждого сценария
+
+Dashboard -[hidden]down-> ImportPage
+ImportPage -[hidden]down-> AnalyticsPage
+AnalyticsPage -[hidden]down-> ReportPage
+CampaignControl -[hidden]down-> ImportControl
+ImportControl -[hidden]down-> AnalysisControl
+AnalysisControl -[hidden]down-> ReportControl
+@enduml
+

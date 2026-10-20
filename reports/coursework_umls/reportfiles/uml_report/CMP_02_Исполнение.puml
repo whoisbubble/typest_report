@@ -1,0 +1,40 @@
+@startuml
+!include common.puml
+left to right direction
+title Компоненты исполняемой системы
+
+component "Браузерный интерфейс\nNext.js" as Web
+component "HTTP API\nNestJS" as Api
+component "Фоновый обработчик\nNestJS Worker" as Worker
+component "Модуль идентификации\nи AccessPolicy" as Identity
+component "Модули предметной области\nCampaigns, Publications, Finance, Reports" as Business
+component "Модуль импорта" as Import
+component "Модуль анализа" as Analysis
+interface "AnalysisProvider" as Provider
+component "RuleBasedAnalyzer" as Rules
+component "TypeORM repositories" as ORM
+database "PostgreSQL" as DB
+folder "Закрытое хранилище\nфайлов импорта" as Files
+
+Web --> Api : HTTPS / JSON
+Api --> Identity : проверка запросов
+Api --> Business
+Api --> Import
+Api --> Analysis
+Worker --> Import : выполнить задание
+Worker --> Analysis : выполнить задание
+Import --> Files
+Import --> ORM
+Analysis --> Provider
+Rules ..|> Provider
+Analysis --> ORM
+Business --> ORM
+Identity --> ORM
+ORM --> DB : SQL
+
+note bottom of Provider
+Интерфейс допускает будущий ML-провайдер.
+В базовом проекте используется анализатор на правилах.
+end note
+@enduml
+

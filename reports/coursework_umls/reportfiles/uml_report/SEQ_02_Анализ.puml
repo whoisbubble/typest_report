@@ -1,0 +1,45 @@
+@startuml
+!include common.puml
+title Последовательность анализа комментариев
+
+actor "Сотрудник" as Employee
+boundary "Страница аналитики" as Page
+control "AnalysisService" as Service
+control "AccessPolicy" as Policy
+control "AnalysisWorker" as Worker
+participant "AnalysisProvider" as Provider
+database "PostgreSQL" as DB
+
+Employee -> Page : запустить анализ публикации
+Page -> Service : run(publicationId)
+Service -> Policy : requireAnalyze(user, publication)
+
+alt нет доступа или нет комментариев
+  Policy --> Service : отказ
+  Service --> Page : операция отклонена
+else анализ разрешён
+  Policy --> Service : разрешено
+  Service -> DB : зафиксировать inputSnapshot и inputRevision
+  DB --> Service : jobId, QUEUED
+  Service --> Page : идентификатор задания
+
+  ... асинхронная обработка ...
+  Worker -> DB : захватить задание и прочитать снимок
+  Worker -> Policy : проверить право инициатора
+  Worker -> Provider : analyze(snapshot, providerVersion)
+  alt ошибка провайдера
+    Provider --> Worker : ошибка
+    Worker -> DB : повторить позже или установить FAILED
+  else результат получен
+    Provider --> Worker : тональность и признаки
+    Worker -> Policy : повторная проверка перед записью
+    Worker -> DB : results + audit + SUCCEEDED в транзакции
+  end
+
+  Page -> Service : getResults(jobId)
+  Service -> DB : результаты и текущая commentsRevision
+  DB --> Service : данные
+  Service --> Page : результаты + признак isStale
+end
+@enduml
+

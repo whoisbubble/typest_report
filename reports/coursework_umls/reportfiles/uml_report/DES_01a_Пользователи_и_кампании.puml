@@ -1,0 +1,63 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Логическая модель классов: пользователи и кампании
+
+class Agency {
+  +id: UUID
+  +name: String
+}
+class User {
+  +id: UUID
+  +email: String
+  -passwordHash: String
+  +role: Role
+  +active: Boolean
+  +deactivate()
+}
+class Session {
+  -tokenHash: String
+  +expiresAt: Instant
+  +revokedAt: Instant?
+  +revoke()
+}
+class Client {
+  +id: UUID
+  +name: String
+}
+class ClientAccess {
+  +userId: UUID
+  +clientId: UUID
+}
+class Campaign {
+  +id: UUID
+  +name: String
+  +status: CampaignStatus
+  +startDate: Date
+  +endDate: Date
+  +plannedBudget: Money
+  +activate()
+  +pause()
+  +complete()
+  +archive()
+}
+class CampaignAssignment {
+  +userId: UUID
+  +campaignId: UUID
+  +assignmentRole: AssignmentRole
+}
+
+Agency "1" *-- "0..*" User
+Agency "1" *-- "0..*" Client
+User "1" *-- "0..*" Session
+Client "1" *-- "0..*" Campaign
+User "1" -- "0..*" ClientAccess
+Client "1" -- "0..*" ClientAccess
+User "1" -- "0..*" CampaignAssignment
+Campaign "1" -- "0..*" CampaignAssignment
+
+User -[hidden]right-> Client
+Session -[hidden]right-> ClientAccess
+ClientAccess -[hidden]right-> CampaignAssignment
+@enduml
+

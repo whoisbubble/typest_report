@@ -1,0 +1,58 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Логическая модель классов: публикации, импорт и анализ
+
+class Campaign {
+  +id: UUID
+}
+class Publication {
+  +id: UUID
+  +platform: Platform
+  +externalId: String
+  +url: URL
+  +commentsRevision: Integer
+}
+class ImportJob {
+  +id: UUID
+  +fileSha256: String
+  +status: JobStatus
+  +attempts: Integer
+  +leaseUntil: Instant?
+}
+class MetricSnapshot {
+  +capturedAt: Instant
+  +views: Long
+  +likes: Long
+  +commentsCount: Long
+  +shares: Long
+}
+class Comment {
+  +externalId: String
+  +text: String
+  +postedAt: Instant
+}
+class AnalysisJob {
+  +id: UUID
+  +inputRevision: Integer
+  +providerVersion: String
+  +status: JobStatus
+}
+class AnalysisResult {
+  +commentExternalId: String
+  +sentiment: Sentiment
+  +suspicionReasons: String[]
+}
+
+Campaign "1" *-- "0..*" Publication
+Publication "1" *-- "0..*" ImportJob
+Publication "1" *-- "0..*" MetricSnapshot
+Publication "1" *-- "0..*" Comment
+Publication "1" *-- "0..*" AnalysisJob
+AnalysisJob "1" *-- "0..*" AnalysisResult
+
+ImportJob -[hidden]right-> MetricSnapshot
+MetricSnapshot -[hidden]right-> Comment
+Comment -[hidden]right-> AnalysisJob
+@enduml
+

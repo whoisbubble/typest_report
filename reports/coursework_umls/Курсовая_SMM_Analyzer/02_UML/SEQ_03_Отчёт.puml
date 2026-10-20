@@ -1,0 +1,43 @@
+@startuml
+!include common.puml
+title Последовательность публикации и чтения отчёта
+
+actor "SMM-менеджер" as Manager
+actor "Заказчик" as Customer
+boundary "Страница отчёта" as Page
+control "ReportService" as Service
+control "AccessPolicy" as Policy
+database "PostgreSQL" as DB
+
+Manager -> Page : опубликовать черновик
+Page -> Service : publish(reportId, expectedVersion)
+Service -> Policy : requirePublish(user, campaign)
+
+alt нет полномочия
+  Policy --> Service : отказ
+  Service --> Page : 403
+else публикация разрешена
+  Service -> DB : заблокировать отчёт и проверить version, sourceRefs
+  alt версия конфликтует или анализ устарел
+    DB --> Service : конфликт
+    Service --> Page : 409 + причина
+  else источники допустимы
+    Service -> Service : сформировать clientPayload
+    Service -> DB : PUBLISHED + payload + audit, COMMIT
+    Service --> Page : опубликовано
+  end
+end
+
+Customer -> Page : открыть отчёт
+Page -> Service : getClientReport(reportId)
+Service -> Policy : requireClientReport(user, reportId)
+Policy -> DB : проверить ClientUser и статус PUBLISHED
+alt отчёт принадлежит клиенту
+  Service -> DB : получить clientPayload
+  DB --> Service : клиентское представление
+  Service --> Page : данные отчёта
+else отчёт чужой или не опубликован
+  Service --> Page : отказ без раскрытия содержимого
+end
+@enduml
+

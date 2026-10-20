@@ -1,0 +1,53 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Диаграмма развертывания SMM Analyzer
+
+node "Устройство пользователя" as ClientDevice {
+  artifact "Веб-браузер" as Browser
+}
+
+node "Сервер агентства" as Server {
+  node "Docker Engine\nзакрытая сеть" as Docker {
+    node "reverse-proxy container" as ProxyNode {
+      artifact "Reverse proxy" as Proxy
+    }
+    node "web container" as WebNode {
+      artifact "Next.js" as Web
+    }
+    node "api container" as ApiNode {
+      artifact "NestJS API" as Api
+    }
+    node "worker container" as WorkerNode {
+      artifact "NestJS Worker" as Worker
+    }
+    node "db container" as DbNode {
+      database "PostgreSQL" as DB
+    }
+  }
+  folder "db_data volume" as DbVolume
+  folder "imports volume\nзакрытый" as ImportVolume
+  artifact "Backup job" as Backup
+}
+
+node "Отдельное хранилище" as BackupNode {
+  artifact "Зашифрованные\nрезервные копии" as Archives
+}
+
+Browser --> Proxy : HTTPS :443
+Proxy --> Web : HTTP :3000
+Proxy --> Api : HTTP :3001 /api
+Api --> DB : SQL
+Worker --> DB : SQL
+Api --> ImportVolume
+Worker --> ImportVolume
+DB --> DbVolume
+Backup --> DB
+Backup --> ImportVolume
+Backup --> Archives : защищённая передача
+
+Web -[hidden]right-> Api
+Api -[hidden]right-> Worker
+Worker -[hidden]right-> DB
+DbVolume -[hidden]right-> ImportVolume
+@enduml

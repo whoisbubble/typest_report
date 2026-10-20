@@ -1,0 +1,92 @@
+@startuml
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Проектные классы: сервисы и интерфейсы
+class AuthController
+class CampaignController
+class ImportController
+class AnalysisController
+class FinanceController
+class ReportController
+class AuthService {
++login(email, password): Session
+ +logout(sessionId): void
+}
+class CampaignService {
++create(dto): Campaign
+ +registerPublication(dto): Publication
+}
+class ImportService {
++submit(file, publicationId): ImportJob
+ +apply(jobId): void
+}
+class AnalysisService {
++run(publicationId): AnalysisJob
+ +execute(jobId): void
+}
+class FinanceService {
++post(dto): FinancialEntry
+ +correct(id, dto): FinancialEntry
+}
+class ReportService {
++draft(campaignId, period): Report
+ +publish(id, version): Report
+ +getClientReport(id): ClientPayload
+}
+class AccessPolicy {
++require(user, action, resource): void
+}
+interface AnalysisProvider {
++analyze(input): ResultSet
+}
+class RuleBasedAnalyzer
+interface ImportRepository {
++createOrGet(hash, publication): ImportJob
+ +claim(): ImportJob
+}
+interface AnalysisRepository {
++createOrGet(snapshot): AnalysisJob
+ +claim(): AnalysisJob
+}
+interface ReportRepository {
++save(report): void
+ +find(id): Report
+}
+class TypeOrmImportRepository
+class TypeOrmAnalysisRepository
+class TypeOrmReportRepository
+class ImportWorker
+class AnalysisWorker
+AuthController --> AuthService
+CampaignController --> CampaignService
+ImportController --> ImportService
+AnalysisController --> AnalysisService
+FinanceController --> FinanceService
+ReportController --> ReportService
+CampaignService --> AccessPolicy
+ImportService --> AccessPolicy
+AnalysisService --> AccessPolicy
+FinanceService --> AccessPolicy
+ReportService --> AccessPolicy
+ImportService --> ImportRepository
+AnalysisService --> AnalysisRepository
+ReportService --> ReportRepository
+AnalysisService --> AnalysisProvider
+RuleBasedAnalyzer ..|> AnalysisProvider
+TypeOrmImportRepository ..|> ImportRepository
+TypeOrmAnalysisRepository ..|> AnalysisRepository
+TypeOrmReportRepository ..|> ReportRepository
+ImportWorker --> ImportService
+AnalysisWorker --> AnalysisService
+note bottom of AccessPolicy
+Роль + agencyId + CampaignMember / ClientUser.
+AuthService проверяет пароль и активность,
+другие сервисы — сессию и полномочия.
+end note
+@enduml

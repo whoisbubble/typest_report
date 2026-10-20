@@ -1,0 +1,39 @@
+@startuml
+!include common.puml
+left to right direction
+title Компоненты исходного кода SMM Analyzer
+
+package "apps" {
+  component "web\nNext.js" as Web
+  component "api\nNestJS" as Api
+  component "worker\nNestJS" as Worker
+}
+
+package "packages" {
+  component "contracts\nDTO и схемы" as Contracts
+  component "domain\nсущности и правила" as Domain
+  component "application\nсценарии и порты" as Application
+  component "infrastructure\nTypeORM, файлы, анализатор" as Infrastructure
+}
+
+component "database\nмиграции PostgreSQL" as Migrations
+component "tests\nпроверки доменных правил" as Tests
+
+Web --> Contracts
+Api --> Contracts
+Api --> Application
+Worker --> Application
+Application --> Domain
+Infrastructure ..> Application
+Infrastructure --> Domain
+Infrastructure --> Migrations
+Tests ..> Domain
+Tests ..> Application
+
+Web -[hidden]down-> Api
+Api -[hidden]down-> Worker
+Contracts -[hidden]down-> Domain
+Domain -[hidden]down-> Application
+Application -[hidden]down-> Infrastructure
+@enduml
+

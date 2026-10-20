@@ -1,0 +1,37 @@
+@startuml
+!include common.puml
+skinparam linetype polyline
+left to right direction
+title Коммуникация объектов при импорте
+
+object "manager : Менеджер" as Manager
+object "page : ImportPage" as Page
+object "service : ImportService" as Service
+object "jobs : ImportRepository" as Repo
+object "policy : AccessPolicy" as Policy
+object "files : FileStore" as Files
+object "worker : ImportWorker" as Worker
+object "validator : ImportValidator" as Validator
+object "db : PostgreSQL" as DB
+
+Manager -right-> Page : 1: выбрать файл
+Page -right-> Service : 2: submit()\n5: getStatus()\n6: показать итог
+Service -up-> Policy : 2.1: requireImport()
+Service -down-> Files : 2.2: store()
+Service -right-> Repo : 2.3: createOrGet()\n5.1: find()
+Repo -down-> DB : 2.3.1: записать или найти job\n5.1.1: прочитать статус
+Worker -left-> Files : 3.1: read()
+Worker -up-> Policy : 3.2: повторно проверить право
+Worker -right-> Validator : 3.3: validate()
+Worker -down-> DB : 3: claim()\n3.4: данные + аудит + COMMIT
+
+Policy -[hidden]right-> Files
+Files -[hidden]right-> Worker
+Validator -[hidden]down-> DB
+
+note bottom of Worker
+Сообщения 3–3.4 выполняются асинхронно.
+Предметные изменения и статус фиксируются одной транзакцией.
+end note
+@enduml
+

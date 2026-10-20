@@ -1,0 +1,35 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Детализация: отчётность
+actor "SMM-менеджер" as M
+actor "Аналитик" as A
+actor "Администратор" as D
+actor "Заказчик" as C
+D --|> M
+D --|> A
+rectangle "SMM Analyzer" {
+ usecase "UC-07a Подготовить черновик\nТочка расширения: выводы" as Draft
+ usecase "Собрать показатели\nза период" as Agg
+ usecase "Добавить рекомендации" as Rec
+ usecase "UC-07b Опубликовать отчёт" as Pub
+ usecase "Сформировать безопасное\nклиентское представление" as Safe
+ usecase "UC-08 Прочитать\nопубликованный отчёт" as Read
+}
+M -- Draft
+A -- Draft
+Draft ..> Agg : <<include>>
+Rec ..> Draft : <<extend>>\n[автор добавляет рекомендации]
+M -- Pub
+Pub ..> Safe : <<include>>
+C -- Read
+M -- Read
+A -- Read
+@enduml

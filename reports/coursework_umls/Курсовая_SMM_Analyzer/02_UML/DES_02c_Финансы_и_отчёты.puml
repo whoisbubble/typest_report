@@ -1,0 +1,38 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Физическая модель классов сервера: финансы и отчёты
+
+class FinanceController <<NestJS controller>>
+class ReportController <<NestJS controller>>
+class FinanceService <<service>> {
+  +post(dto, actor): FinancialEntry
+  +correct(id, dto, actor): FinancialEntry
+}
+class ReportService <<service>> {
+  +createDraft(campaignId, period, actor): Report
+  +publish(id, expectedVersion, actor): Report
+  +getClientReport(id, actor): ClientReportView
+}
+class AccessPolicy <<domain service>> {
+  +require(actor, action, resource): void
+}
+interface FinanceRepository
+interface ReportRepository
+class TypeOrmFinanceRepository <<adapter>>
+class TypeOrmReportRepository <<adapter>>
+
+FinanceController --> FinanceService
+ReportController --> ReportService
+FinanceService --> AccessPolicy
+ReportService --> AccessPolicy
+FinanceService --> FinanceRepository
+ReportService --> ReportRepository
+TypeOrmFinanceRepository ..|> FinanceRepository
+TypeOrmReportRepository ..|> ReportRepository
+
+FinanceController -[hidden]right-> ReportController
+FinanceService -[hidden]right-> ReportService
+FinanceRepository -[hidden]right-> ReportRepository
+@enduml
+

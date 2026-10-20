@@ -1,0 +1,56 @@
+@startuml
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Классы анализа: boundary / control / entity
+class LoginPage <<boundary>>
+class CampaignPage <<boundary>>
+class ImportPage <<boundary>>
+class AnalyticsPage <<boundary>>
+class ReportPage <<boundary>>
+class AuthControl <<control>>
+class CampaignControl <<control>>
+class ImportControl <<control>>
+class AnalysisControl <<control>>
+class ReportControl <<control>>
+class User <<entity>>
+class Client <<entity>>
+class Campaign <<entity>>
+class Publication <<entity>>
+class ImportJob <<entity>>
+class MetricSnapshot <<entity>>
+class Comment <<entity>>
+class AnalysisJob <<entity>>
+class AnalysisResult <<entity>>
+class FinancialEntry <<entity>>
+class Report <<entity>>
+LoginPage --> AuthControl
+AuthControl ..> User
+CampaignPage --> CampaignControl
+CampaignControl ..> Campaign
+CampaignControl ..> Publication
+ImportPage --> ImportControl
+ImportControl ..> ImportJob
+ImportControl ..> Comment
+ImportControl ..> MetricSnapshot
+AnalyticsPage --> AnalysisControl
+AnalysisControl ..> AnalysisJob
+AnalysisControl ..> AnalysisResult
+ReportPage --> ReportControl
+ReportControl ..> Report
+ReportControl ..> FinancialEntry
+Client "1" -- "0..*" Campaign
+Campaign "1" -- "0..*" Publication
+Campaign "1" -- "0..*" FinancialEntry
+Campaign "1" -- "0..*" Report
+Publication "1" -- "0..*" Comment
+Publication "1" -- "0..*" MetricSnapshot
+Publication "1" -- "0..*" ImportJob
+Publication "1" -- "0..*" AnalysisJob
+AnalysisJob "1" -- "0..*" AnalysisResult
+@enduml

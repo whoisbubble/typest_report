@@ -1,0 +1,28 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Классы анализа: сущности предметной области
+
+class "Клиент" as Client <<entity>>
+class "Кампания" as Campaign <<entity>>
+class "Публикация" as Publication <<entity>>
+class "Задание импорта" as ImportJob <<entity>>
+class "Комментарий" as Comment <<entity>>
+class "Снимок метрик" as Metric <<entity>>
+class "Задание анализа" as AnalysisJob <<entity>>
+class "Финансовая операция" as Finance <<entity>>
+class "Отчёт" as Report <<entity>>
+
+Client "1" -- "0..*" Campaign
+Campaign "1" -- "0..*" Publication
+Campaign "1" -- "0..*" Finance
+Campaign "1" -- "0..*" Report
+Publication "1" -- "0..*" ImportJob
+Publication "1" -- "0..*" Comment
+Publication "1" -- "0..*" Metric
+Publication "1" -- "0..*" AnalysisJob
+
+ImportJob -[hidden]right-> Comment
+Comment -[hidden]right-> Metric
+Metric -[hidden]right-> AnalysisJob
+@enduml

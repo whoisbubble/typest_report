@@ -1,0 +1,44 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Контекстная диаграмма вариантов использования SMM Analyzer
+
+actor "SMM-менеджер" as Manager
+actor "Аналитик" as Analyst
+actor "Администратор" as Admin
+actor "Заказчик" as Customer
+
+rectangle "SMM Analyzer" {
+  usecase "Вести клиентов, кампании\nи публикации" as UCCampaign
+  usecase "Импортировать статистику\nи комментарии" as UCImport
+  usecase "Анализировать обратную связь\nи показатели" as UCAnalyze
+  usecase "Учитывать доходы\nи расходы" as UCFinance
+  usecase "Подготовить черновик\nотчёта" as UCDraft
+  usecase "Опубликовать отчёт" as UCPublish
+  usecase "Просмотреть опубликованный\nотчёт" as UCRead
+  usecase "Управлять доступом\nи просматривать аудит" as UCAccess
+}
+
+Manager --> UCCampaign
+Manager --> UCImport
+Manager --> UCFinance
+Manager --> UCPublish
+Analyst --> UCAnalyze
+Analyst --> UCDraft
+Customer --> UCRead
+Admin --> UCAccess
+
+Admin -[hidden]right-> Manager
+Manager -[hidden]right-> Analyst
+Analyst -[hidden]right-> Customer
+UCCampaign -[hidden]down-> UCImport
+UCImport -[hidden]down-> UCFinance
+UCFinance -[hidden]down-> UCPublish
+UCAnalyze -[hidden]down-> UCDraft
+
+note bottom of UCAccess
+Все роли входят в систему по своей учётной записи.
+Сервер проверяет роль и область доступа для каждого действия.
+end note
+@enduml
+

@@ -1,0 +1,54 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title SMM Analyzer — обзор вариантов использования
+left to right direction
+actor "Пользователь" as U
+actor "SMM-менеджер" as M
+actor "Аналитик" as A
+actor "Администратор" as D
+actor "Заказчик" as C
+M --|> U
+A --|> U
+C --|> U
+D --|> M
+D --|> A
+rectangle "SMM Analyzer" {
+ usecase "UC-01 Войти /\nUC-12 Выйти" as Login
+ usecase "UC-02 Настроить кампанию" as Campaign
+ usecase "UC-09 Управлять пользователями,\nклиентами и назначениями" as Users
+ usecase "UC-03 Вести публикации" as Pub
+ usecase "UC-04 Импортировать данные" as Imp
+ usecase "UC-05 Запустить анализ" as Ana
+ usecase "UC-11 Изучить статистику\nи результаты" as Stats
+ usecase "UC-06 Учесть доход / расход" as Money
+ usecase "UC-07a Подготовить отчёт" as Draft
+ usecase "UC-07b Опубликовать отчёт" as Publish
+ usecase "UC-08 Просмотреть\nопубликованный отчёт" as Read
+ usecase "UC-10 Просмотреть аудит" as Audit
+}
+U -- Login
+D -- Campaign
+D -- Users
+D -- Audit
+M -- Pub
+M -- Imp
+M -- Ana
+A -- Ana
+M -- Stats
+A -- Stats
+M -- Money
+M -- Draft
+A -- Draft
+M -- Publish
+C -- Read
+M -- Read
+A -- Read
+@enduml

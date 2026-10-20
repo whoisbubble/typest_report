@@ -1,0 +1,26 @@
+@startuml
+!include common.puml
+title Диаграмма состояний объекта Campaign
+top to bottom direction
+
+state "Черновик\nDRAFT" as Draft
+state "Активна\nACTIVE" as Active
+state "Приостановлена\nPAUSED" as Paused
+state "Завершена\nCOMPLETED" as Completed
+state "Архив\nARCHIVED" as Archived
+
+[*] --> Draft : создать
+Draft --> Active : активировать\n[заполнены поля и назначения]
+Active --> Paused : приостановить
+Paused --> Active : возобновить
+Active --> Completed : завершить
+Draft --> Archived : отменить черновик
+Completed --> Archived : архивировать
+Archived --> [*]
+
+note right of Archived
+Данные доступны только для чтения.
+Физическое удаление не выполняется.
+end note
+@enduml
+

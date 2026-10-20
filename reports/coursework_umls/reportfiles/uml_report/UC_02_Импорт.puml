@@ -1,0 +1,29 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Декомпозиция варианта использования «Импортировать данные»
+
+actor "SMM-менеджер" as Manager
+
+rectangle "SMM Analyzer" {
+  usecase "Импортировать данные" as Import
+  usecase "Проверить право\nна кампанию" as Access
+  usecase "Проверить файл и\nверсию формата" as Validate
+  usecase "Создать или найти\nзадание по хешу" as Idempotency
+  usecase "Сохранить метрики\nи комментарии" as Store
+  usecase "Зафиксировать событие\nв журнале аудита" as Audit
+  usecase "Получить состояние\nзадания" as Status
+}
+
+Manager --> Import
+Manager --> Status
+Import .down.> Access : <<include>>
+Import .down.> Validate : <<include>>
+Import .down.> Idempotency : <<include>>
+Store .up.> Import : <<extend>>\n[проверки успешны]
+Store .down.> Audit : <<include>>
+
+Access -[hidden]right-> Validate
+Validate -[hidden]right-> Idempotency
+@enduml
+

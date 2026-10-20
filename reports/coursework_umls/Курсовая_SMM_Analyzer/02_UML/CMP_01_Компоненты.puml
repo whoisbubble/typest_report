@@ -1,0 +1,49 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Компоненты SMM Analyzer
+component "Next.js Web" as Web
+package "NestJS API" as API {
+ component "Identity / AccessPolicy" as Auth
+ component "Campaigns / Publications" as Campaigns
+ component Imports
+ component Analysis
+ component Finance
+ component Reports
+ component Audit
+}
+component "NestJS Worker" as Worker
+interface AnalysisProvider as AP
+component RuleBasedAnalyzer as Rules
+component "TypeORM / repositories" as ORM
+database PostgreSQL as DB
+folder "Закрытый том импортов" as Files
+Web --> API : HTTPS / JSON
+API ..> Auth : сквозная проверка запросов
+Campaigns --> ORM
+Imports --> ORM : задания и данные
+Analysis --> ORM : задания и результаты
+Finance --> ORM
+Reports --> ORM : снимки и отчёты
+Audit --> ORM
+API ..> Audit : изменения
+Worker --> Imports : apply(job)
+Worker --> Analysis : execute(job)
+Worker --> ORM : claim / lease
+Worker --> Auth : повторная проверка доступа
+Analysis --> AP
+Rules ..|> AP
+ORM --> DB : SQL
+Imports --> Files : read / write
+note right of AP
+Будущая ВКР: MLProvider.
+Сейчас используется RuleBasedAnalyzer.
+end note
+@enduml

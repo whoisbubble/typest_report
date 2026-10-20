@@ -1,0 +1,32 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Коммуникация UC-05: успешный анализ
+object "employee : Сотрудник" as U
+object "page : AnalyticsPage" as UI
+object "control : AnalysisControl" as C
+object "policy : AccessPolicy" as P
+object "db : PostgreSQL" as DB
+object "worker : AnalysisWorker" as W
+object "provider : AnalysisProvider" as AP
+U --> UI : 1: запустить
+UI --> C : 2: run()\n5: getResults()
+C --> P : 2.1: requireAnalyze()\n5.1: проверить доступ
+C --> DB : 2.2: snapshot + revision + job\n5.2: results + currentRevision
+C --> UI : 3: jobId\n6: results + isStale
+W --> DB : 4: claim()\n4.2: read snapshot\n4.6: results + audit + SUCCEEDED
+W --> P : 4.1, 4.5: проверить доступ
+W --> AP : 4.3: analyze()
+AP --> W : 4.4: результаты
+note bottom of W
+[доступ сохранён, провайдер успешен]
+Входной снимок неизменяем.
+end note
+@enduml

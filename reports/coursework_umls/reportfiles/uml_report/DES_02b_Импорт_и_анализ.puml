@@ -1,0 +1,48 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Физическая модель классов сервера: импорт и анализ
+
+class ImportController <<NestJS controller>>
+class AnalysisController <<NestJS controller>>
+class ImportService <<service>> {
+  +submit(file, publicationId, actor): ImportJob
+  +getStatus(jobId, actor): ImportJobView
+}
+class AnalysisService <<service>> {
+  +run(publicationId, actor): AnalysisJob
+  +getResults(jobId, actor): AnalysisView
+}
+class ImportWorker <<worker>> {
+  +execute(jobId): void
+}
+class AnalysisWorker <<worker>> {
+  +execute(jobId): void
+}
+interface ImportRepository
+interface AnalysisRepository
+interface AnalysisProvider {
+  +analyze(input): ResultSet
+}
+class TypeOrmImportRepository <<adapter>>
+class TypeOrmAnalysisRepository <<adapter>>
+class RuleBasedAnalyzer <<adapter>>
+
+ImportController --> ImportService
+AnalysisController --> AnalysisService
+ImportWorker --> ImportService
+AnalysisWorker --> AnalysisService
+ImportService --> ImportRepository
+AnalysisService --> AnalysisRepository
+AnalysisService --> AnalysisProvider
+TypeOrmImportRepository ..|> ImportRepository
+TypeOrmAnalysisRepository ..|> AnalysisRepository
+RuleBasedAnalyzer ..|> AnalysisProvider
+
+ImportController -[hidden]right-> AnalysisController
+ImportService -[hidden]right-> AnalysisService
+ImportWorker -[hidden]right-> AnalysisWorker
+ImportRepository -[hidden]right-> AnalysisRepository
+AnalysisRepository -[hidden]right-> AnalysisProvider
+@enduml
+

@@ -1,0 +1,28 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Декомпозиция варианта использования «Анализировать обратную связь»
+
+actor "Сотрудник" as Employee
+
+rectangle "SMM Analyzer" {
+  usecase "Запустить анализ" as Run
+  usecase "Проверить доступ\nк кампании" as Access
+  usecase "Зафиксировать версию\nнабора комментариев" as Snapshot
+  usecase "Определить тональность" as Sentiment
+  usecase "Выявить подозрительные\nпризнаки" as Suspicion
+  usecase "Просмотреть результаты\nи актуальность" as View
+}
+
+Employee --> Run
+Employee --> View
+Run .down.> Access : <<include>>
+Run .down.> Snapshot : <<include>>
+Run .down.> Sentiment : <<include>>
+Run .down.> Suspicion : <<include>>
+
+Access -[hidden]right-> Snapshot
+Snapshot -[hidden]right-> Sentiment
+Sentiment -[hidden]right-> Suspicion
+@enduml
+

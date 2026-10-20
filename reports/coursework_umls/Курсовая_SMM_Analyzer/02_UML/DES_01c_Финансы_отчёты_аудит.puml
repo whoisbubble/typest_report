@@ -1,0 +1,48 @@
+@startuml
+!include common.puml
+left to right direction
+title Логическая модель классов: финансы, отчёты и аудит
+
+class Campaign {
+  +id: UUID
+}
+class FinancialEntry {
+  +id: UUID
+  +direction: INCOME | EXPENSE
+  +amount: Money
+  +occurredOn: Date
+  +status: POSTED | REVERSED
+  +reverse()
+}
+class Report {
+  +id: UUID
+  +status: DRAFT | PUBLISHED | SUPERSEDED
+  +periodStart: Date
+  +periodEnd: Date
+  +version: Integer
+  -internalPayload: JSON
+  +clientPayload: JSON
+  +sourceRefs: JSON
+  +publish(expectedVersion)
+}
+class User {
+  +id: UUID
+}
+class AuditEvent {
+  +id: UUID
+  +actorId: UUID
+  +entityType: String
+  +entityId: UUID
+  +action: String
+  +createdAt: Instant
+}
+
+Campaign "1" *-- "0..*" FinancialEntry
+Campaign "1" *-- "0..*" Report
+Report "0..1" --> "0..1" Report : previousVersion
+User "1" -- "0..*" AuditEvent : actor
+
+FinancialEntry -[hidden]down-> Report
+Campaign -[hidden]down-> User
+@enduml
+

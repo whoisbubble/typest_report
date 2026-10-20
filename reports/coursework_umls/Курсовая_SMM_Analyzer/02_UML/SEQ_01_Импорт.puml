@@ -1,0 +1,48 @@
+@startuml
+!include common.puml
+title Последовательность выполнения импорта
+
+actor "SMM-менеджер" as Manager
+boundary "Страница импорта" as Page
+control "ImportService" as Service
+control "AccessPolicy" as Policy
+control "ImportWorker" as Worker
+participant "FileStore" as Files
+database "PostgreSQL" as DB
+
+Manager -> Page : выбрать публикацию и JSON-файл
+Page -> Service : submit(publicationId, file)
+Service -> Policy : requireImport(user, publication)
+
+alt доступ запрещён или кампания не ACTIVE
+  Policy --> Service : отказ
+  Service --> Page : 403 / 409
+else действие разрешено
+  Policy --> Service : разрешено
+  Service -> Files : сохранить файл
+  Service -> DB : createOrGet(hash, publicationId)
+  DB --> Service : jobId, status
+  Service --> Page : 202 + состояние задания
+
+  ... асинхронная обработка нового задания ...
+  Worker -> DB : захватить QUEUED и установить lease
+  Worker -> Files : прочитать файл
+  Worker -> Worker : проверить схему и значения
+  Worker -> Policy : повторно проверить право инициатора
+  alt данные или право недопустимы
+    Worker -> DB : FAILED + описание ошибки
+  else проверки успешны
+    group одна транзакция
+      Worker -> DB : сохранить снимок метрик и комментарии
+      Worker -> DB : изменить revision, записать аудит и SUCCEEDED
+    end
+  end
+
+  Page -> Service : getStatus(jobId)
+  Service -> Policy : requireReadJob(user, jobId)
+  Service -> DB : получить итог
+  DB --> Service : статус и сводка
+  Service --> Page : результат импорта
+end
+@enduml
+

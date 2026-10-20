@@ -1,0 +1,147 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Проектные классы: сущности и связи
+class Agency {
++id: UUID
+}
+class User {
++id: UUID
+ +email: string
+ -passwordHash: string
+ +role: Role
+ +active: boolean
+ +deactivate()
+}
+class Session {
+-tokenHash: string
+ +expiresAt: Instant
+ +revokedAt: Instant?
+ +revoke()
+}
+class Client {
++id: UUID
+ +name: string
+}
+class ClientUser {
++clientId: UUID
+ +userId: UUID
+}
+class Campaign {
++id: UUID
+ +status: CampaignStatus
+ +startDate: Date
+ +endDate: Date
+ +budget: Decimal
+ +activate()
+ +pause()
+ +complete()
+ +archive()
+}
+class CampaignMember {
++campaignId: UUID
+ +userId: UUID
+}
+class Publication {
++id: UUID
+ +platform: string
+ +externalId: string
+ +url: string
+ +commentsRevision: int
+}
+class ImportJob {
++fileSha256: string
+ +fileKey: string
+ +status: ImportStatus
+ +initiatorId: UUID
+ +attempts: int
+ +leaseUntil: Instant?
+}
+class MetricSnapshot {
++capturedAt: Instant
+ +views: bigint
+ +likes: bigint
+ +commentsCount: bigint
+ +shares: bigint
+}
+class Comment {
++externalId: string
+ +text: string
+ +authorExternalId: string?
+ +postedAt: Instant
+}
+class AnalysisJob {
++inputRevision: int
+ +inputSnapshot: JSON
+ +providerVersion: string
+ +status: JobStatus
+ +initiatorId: UUID
+ +attempts: int
+ +leaseUntil: Instant?
+}
+class AnalysisResult {
++commentExternalId: string
+ +sentiment: Sentiment
+ +suspicionReasons: JSON
+}
+class FinancialEntry {
++direction: INCOME | EXPENSE
+ +amount: Decimal
+ +currency: RUB
+ +occurredOn: Date
+ +status: POSTED | REVERSED
+ +replacesId: UUID?
+ +idempotencyKey: UUID
+ +reverse()
+}
+class Report {
++status: DRAFT | PUBLISHED
+ +periodStart: Date
+ +periodEnd: Date
+ +version: int
+ -internalPayload: JSON
+ +clientPayload: JSON
+ +sourceRefs: JSON
+ +previousReportId: UUID?
+ +publish()
+}
+class AuditEvent {
++actorId: UUID
+ +entityType: string
+ +entityId: UUID
+ +action: string
+ +createdAt: Instant
+}
+Agency "1" -- "0..*" User
+Agency "1" -- "0..*" Client
+User "1" -- "0..*" Session
+User "1" -- "0..*" ClientUser
+Client "1" -- "0..*" ClientUser
+Client "1" -- "0..*" Campaign
+User "1" -- "0..*" CampaignMember
+Campaign "1" -- "0..*" CampaignMember
+Campaign "1" -- "0..*" Publication
+Campaign "1" -- "0..*" FinancialEntry
+Campaign "1" -- "0..*" Report
+Publication "1" -- "0..*" ImportJob
+Publication "1" -- "0..*" MetricSnapshot
+Publication "1" -- "0..*" Comment
+Publication "1" -- "0..*" AnalysisJob
+AnalysisJob "1" -- "0..*" AnalysisResult
+User "1" -- "0..*" AuditEvent : actor
+note bottom of AnalysisResult
+commentExternalId ссылается на элемент
+неизменяемого inputSnapshot задания.
+end note
+note bottom of Campaign
+Общие id, agencyId, timestamps, version
+и составные FK описаны в разделе 4.1.
+end note
+@enduml

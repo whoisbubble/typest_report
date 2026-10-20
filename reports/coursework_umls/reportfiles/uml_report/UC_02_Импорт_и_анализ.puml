@@ -1,0 +1,37 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title Детализация: импорт и анализ
+actor "SMM-менеджер" as M
+actor "Аналитик" as A
+actor "Администратор" as D
+D --|> M
+D --|> A
+rectangle "SMM Analyzer" {
+ usecase "UC-04 Импортировать данные" as I
+ usecase "Проверить формат\nи значения" as V
+ usecase "Сохранить снимок\nи комментарии" as S
+ usecase "UC-05 Запустить анализ" as Run
+ usecase "Зафиксировать входной\nнабор комментариев" as Snap
+ usecase "UC-11 Изучить результаты" as View
+}
+M -- I
+I ..> V : <<include>>
+I ..> S : <<include>>
+M -- Run
+A -- Run
+Run ..> Snap : <<include>>
+M -- View
+A -- View
+note bottom of S
+Только при успешной проверке;
+вся запись — одна транзакция.
+end note
+@enduml

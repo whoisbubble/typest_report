@@ -1,0 +1,37 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Декомпозиция вариантов использования отчётности
+
+actor "Сотрудник" as Employee
+actor "SMM-менеджер" as Manager
+actor "Заказчик" as Customer
+
+rectangle "SMM Analyzer" {
+  usecase "Подготовить черновик" as Draft
+  usecase "Собрать согласованный\nснимок данных" as Snapshot
+  usecase "Добавить выводы\nи рекомендации" as Conclusions
+  usecase "Опубликовать отчёт" as Publish
+  usecase "Проверить версию и\nактуальность анализа" as Check
+  usecase "Сформировать клиентское\nпредставление" as ClientView
+  usecase "Просмотреть опубликованный\nотчёт" as Read
+}
+
+Employee --> Draft
+Manager --> Publish
+Customer --> Read
+Draft .down.> Snapshot : <<include>>
+Conclusions .up.> Draft : <<extend>>
+Publish .down.> Check : <<include>>
+Publish .down.> ClientView : <<include>>
+Read .down.> ClientView : <<include>>
+
+Snapshot -[hidden]down-> Conclusions
+Check -[hidden]down-> ClientView
+
+note bottom of Conclusions
+Автор добавляет выводы по мере
+подготовки черновика.
+end note
+@enduml
+

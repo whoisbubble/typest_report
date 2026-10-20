@@ -1,0 +1,20 @@
+@startuml
+!include common.puml
+title Диаграмма состояний объекта Report
+
+state "Черновик\nDRAFT" as Draft
+state "Опубликован\nPUBLISHED" as Published
+state "Заменён новой версией\nSUPERSEDED" as Superseded
+
+[*] --> Draft : создать снимок за период
+Draft --> Draft : редактировать\n[expectedVersion совпадает]
+Draft --> Published : опубликовать\n[роль, версия и источники допустимы]\n/ зафиксировать clientPayload
+Published --> Superseded : опубликовать исправленную версию
+Superseded --> [*]
+
+note right of Published
+Опубликованная версия неизменяема.
+Исправление создаётся как новый Report.
+end note
+@enduml
+

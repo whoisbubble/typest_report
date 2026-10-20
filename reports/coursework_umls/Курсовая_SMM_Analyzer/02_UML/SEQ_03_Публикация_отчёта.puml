@@ -1,0 +1,44 @@
+@startuml
+!pragma layout smetana
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 14
+skinparam shadowing false
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+skinparam wrapWidth 220
+skinparam maxMessageSize 180
+hide empty members
+title UC-07/08: публикация и чтение отчёта
+actor "Менеджер" as M
+boundary ReportPage as UI
+control ReportControl as C
+control AccessPolicy as P
+database PostgreSQL as DB
+actor "Заказчик" as Customer
+M -> UI : Опубликовать черновик
+UI -> C : publish(reportId, expectedVersion)
+C -> P : requirePublish(user, campaign)
+alt нет права
+ C --> UI : отказ
+else разрешено
+ C -> DB : BEGIN; lock report; проверить version и sourceRefs
+ alt конфликт версии / включённый анализ устарел
+  C -> DB : ROLLBACK
+  C --> UI : 409, исправить черновик
+ else данные допустимы
+  C -> C : buildClientPayload()\nисключить внутренние данные
+  C -> DB : PUBLISHED + payload + audit; COMMIT
+  C --> UI : опубликован
+ end
+end
+Customer -> UI : Открыть отчёт
+UI -> C : getClientReport(id)
+C -> P : requireClientReport(user, id)
+P -> DB : ClientUser + campaign.clientId + status
+alt свой опубликованный отчёт
+ C -> DB : SELECT clientPayload
+ C --> UI : клиентское представление
+else чужой / неопубликованный
+ C --> UI : отказ без содержимого
+end
+@enduml
