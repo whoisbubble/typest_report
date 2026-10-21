@@ -1,43 +1,35 @@
 @startuml
 !include common.puml
-title Последовательность публикации и чтения отчёта
+title Последовательность публикации и просмотра отчёта
 
 actor "SMM-менеджер" as Manager
 actor "Заказчик" as Customer
 boundary "Страница отчёта" as Page
 control "ReportService" as Service
-control "AccessPolicy" as Policy
-database "PostgreSQL" as DB
+database "База данных" as DB
 
-Manager -> Page : опубликовать черновик
-Page -> Service : publish(reportId, expectedVersion)
-Service -> Policy : requirePublish(user, campaign)
+Manager -> Page : 1. Опубликовать черновик
+Page -> Service : 2. Передать отчёт и его версию
+Service -> Service : 2.1. Проверить полномочия и источники
 
-alt нет полномочия
-  Policy --> Service : отказ
-  Service --> Page : 403
-else публикация разрешена
-  Service -> DB : заблокировать отчёт и проверить version, sourceRefs
-  alt версия конфликтует или анализ устарел
-    DB --> Service : конфликт
-    Service --> Page : 409 + причина
-  else источники допустимы
-    Service -> Service : сформировать clientPayload
-    Service -> DB : PUBLISHED + payload + audit, COMMIT
-    Service --> Page : опубликовано
-  end
+alt публикация невозможна
+  Service --> Page : 3. Вернуть причину отказа
+else проверки успешны
+  Service -> Service : 3. Сформировать клиентскую версию
+  Service -> DB : 4. Сохранить PUBLISHED и аудит
+  DB --> Service : 5. Публикация подтверждена
+  Service --> Page : 6. Показать успешный результат
 end
 
-Customer -> Page : открыть отчёт
-Page -> Service : getClientReport(reportId)
-Service -> Policy : requireClientReport(user, reportId)
-Policy -> DB : проверить ClientUser и статус PUBLISHED
-alt отчёт принадлежит клиенту
-  Service -> DB : получить clientPayload
-  DB --> Service : клиентское представление
-  Service --> Page : данные отчёта
-else отчёт чужой или не опубликован
-  Service --> Page : отказ без раскрытия содержимого
+Customer -> Page : 7. Открыть опубликованный отчёт
+Page -> Service : 8. Запросить клиентскую версию
+Service -> Service : 8.1. Проверить доступ заказчика
+alt доступ разрешён
+  Service -> DB : 9. Прочитать опубликованную версию
+  DB --> Service : 10. Данные отчёта
+  Service --> Page : 11. Показать отчёт
+else доступа нет
+  Service --> Page : 9. Отказать без раскрытия данных
 end
 @enduml
 

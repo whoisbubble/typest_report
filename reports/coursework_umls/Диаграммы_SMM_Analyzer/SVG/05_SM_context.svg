@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1120" role="img" aria-labelledby="05_SM_context-title 05_SM_context-desc" id="d-05_SM_context-root">
+<title id="05_SM_context-title">Контекстный автомат интерфейса</title>
+<desc id="05_SM_context-desc">Состояния интерфейса SMM Analyzer, допустимые переходы, условия и возвраты.</desc>
+<defs>
+      <style>#d-05_SM_context-root { color: #222; font-family: Arial,sans-serif; }
+      #d-05_SM_context-root .diagram-container { width:100%;overflow-x:auto }
+      @media print {
+#d-05_SM_context-root .diagram-container { overflow-x:visible }
+}</style><marker id="d-05_SM_context-arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11" fill="none" stroke="#222" stroke-width="1.8"/></marker></defs>
+<rect width="1800" height="1120" fill="#fff"/>
+<rect x="48" y="120" width="1704" height="820" rx="12" fill="#fff" stroke="#333" stroke-width="1.7"/>
+<text x="900.0" y="152" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Рабочая область · действующий сеанс пользователя</text>
+<path d="M 900 195 L 900 240" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 268 352 L 268 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 332 680 L 332 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 668 352 L 668 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 732 680 L 732 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1068 352 L 1068 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1132 680 L 1132 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1468 352 L 1468 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1532 680 L 1532 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1752 880 L 1768.0 880.0 Q 1776 880 1776.0 888.0 L 1776.0 995.0 Q 1776 1000 1771.0 1000.0 L 1766 1000" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<rect x="62" y="448" width="149" height="58" fill="#fff"/>
+<text x="72" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(данные)</text>
+<text x="72" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
+<rect x="348" y="552" width="148" height="33" fill="#fff"/>
+<text x="358" y="574" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">закрытьРаздел</text>
+<rect x="462" y="448" width="145" height="58" fill="#fff"/>
+<text x="472" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(импорт)</text>
+<text x="472" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
+<rect x="862" y="448" width="143" height="58" fill="#fff"/>
+<text x="872" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(отчёты)</text>
+<text x="872" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
+<rect x="1262" y="448" width="164" height="58" fill="#fff"/>
+<text x="1272" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(просмотр)</text>
+<text x="1272" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
+<rect x="1548" y="552" width="148" height="33" fill="#fff"/>
+<text x="1558" y="574" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">закрытьРаздел</text>
+<rect x="1392" y="956" width="196" height="58" fill="#fff"/>
+<text x="1402" y="978" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выйти [можно выйти]</text>
+<text x="1402" y="1003" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ завершить сеанс</text>
+<circle cx="900" cy="184" r="11" fill="#222"/>
+<rect x="120" y="240" width="1560" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="900.0" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Ожидается выбор раздела</text>
+<line x1="120" y1="286" x2="1680" y2="286" stroke="#888"/>
+<text x="900.0" y="314" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(раздел) [нет прав] / показать отказ</text>
+<rect x="144" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="300.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел данных</text>
+<line x1="144" y1="726" x2="456" y2="726" stroke="#888"/>
+<text x="300.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">кампании · финансы · доступ</text>
+<rect x="544" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="700.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел импорта</text>
+<line x1="544" y1="726" x2="856" y2="726" stroke="#888"/>
+<text x="700.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">подавтомат SM_02</text>
+<g stroke="#333" fill="none"><circle cx="818" cy="792" r="4"/><circle cx="838" cy="792" r="4"/><path d="M822 792 h12"/></g>
+<rect x="944" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1100.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел отчётов</text>
+<line x1="944" y1="726" x2="1256" y2="726" stroke="#888"/>
+<text x="1100.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">подавтомат SM_03</text>
+<g stroke="#333" fill="none"><circle cx="1218" cy="792" r="4"/><circle cx="1238" cy="792" r="4"/><path d="M1222 792 h12"/></g>
+<rect x="1344" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1500.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт просмотр результатов</text>
+<line x1="1344" y1="726" x2="1656" y2="726" stroke="#888"/>
+<text x="1500.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">аналитика · кабинет заказчика</text>
+<circle cx="1752" cy="1000" r="14" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<circle cx="1752" cy="1000" r="9" fill="#222"/>
+<line x1="40" y1="1055" x2="1760" y2="1055" stroke="#bbb"/>
+<text x="900.0" y="1084" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#222">● — начало · ◉ — завершение · событие [условие] / действие — подпись перехода</text>
+<text x="900.0" y="1108" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#222">Неподписанная стрелка срабатывает по завершении поведения состояния.</text>
+</svg>

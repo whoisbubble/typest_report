@@ -1,0 +1,18 @@
+@startuml
+!include common.puml
+top to bottom direction
+title Коммуникация объектов при фоновой обработке импорта
+
+object "worker : ImportWorker" as Worker
+object "files : FileStore" as Files
+object "validator : ImportValidator" as Validator
+object "db : База данных" as DB
+
+Worker -left-> Files : 3.1. read()
+Files -right-> Worker : 3.2. содержимое файла
+Worker -right-> Validator : 3.3. validate()
+Validator -left-> Worker : 3.4. результат проверки
+Worker -down-> Worker : 3.5. повторно проверить право
+Worker -down-> DB : 3.6. сохранить данные,
+Worker -down-> DB : аудит и итоговый статус
+@enduml

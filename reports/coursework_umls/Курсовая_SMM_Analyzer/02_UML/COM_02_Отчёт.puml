@@ -1,29 +1,19 @@
 @startuml
 !include common.puml
-skinparam linetype polyline
 left to right direction
 title Коммуникация объектов при публикации отчёта
 
 object "manager : Менеджер" as Manager
-object "customer : Заказчик" as Customer
-object "page : ReportPage" as Page
+object "page : Страница отчёта" as Page
 object "service : ReportService" as Service
-object "policy : AccessPolicy" as Policy
-object "reports : ReportRepository" as Repo
-object "db : PostgreSQL" as DB
+object "db : База данных" as DB
 
-Manager -right-> Page : 1: опубликовать
-Customer -right-> Page : 4: открыть отчёт
-Page -right-> Service : 2: publish(id, version)\n5: getClientReport()\n6: показать результат
-Service -up-> Policy : 2.1: requirePublish()\n5.1: requireClientReport()
-Service -right-> Repo : 2.2: lockAndFind()\n2.3: savePublished()\n5.2: readClientPayload()
-Repo -down-> DB : 2.2.1: SELECT FOR UPDATE\n2.3.1: отчёт + аудит, COMMIT\n5.2.1: SELECT clientPayload
-
-Manager -[hidden]down-> Customer
-Policy -[hidden]right-> DB
-
-note bottom of Service
-После проверки версии и источников сервис формирует
-клиентское представление без внутренних данных.
-end note
+Manager -right-> Page : 1. опубликовать черновик
+Page -right-> Service : 2. publish(id, version)
+Service -down-> Service : 2.1. проверить доступ,
+Service -down-> Service : версию и источники
+Service -right-> DB : 2.2. сохранить PUBLISHED и аудит
+DB -left-> Service : 2.3. подтверждение
+Service -left-> Page : 2.4. результат публикации
+Page -left-> Manager : 2.5. показать результат
 @enduml

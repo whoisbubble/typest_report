@@ -1,0 +1,77 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Автомат выполнения импорта</title><style>body{background:#fff;color:#222;margin:0;font-family:Arial,sans-serif}main{margin:24px auto;padding:0 16px;max-width:1800px}h1{font-size:24px;font-weight:400}.diagram-container{width:100%;overflow-x:auto}svg{display:block;width:100%;min-width:1600px}@media print{h1{display:none}.diagram-container{overflow-x:visible}svg{min-width:0}}</style></head><body><main><h1>Автомат выполнения импорта</h1><div class="diagram-container"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1340" role="img" aria-labelledby="06_SM_import-title 06_SM_import-desc">
+<title id="06_SM_import-title">Автомат выполнения импорта</title>
+<desc id="06_SM_import-desc">Состояния интерфейса SMM Analyzer, допустимые переходы, условия и возвраты.</desc>
+<defs><marker id="arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11" fill="none" stroke="#222" stroke-width="1.8"/></marker></defs>
+<rect width="1600" height="1340" fill="#fff"/>
+<rect x="48" y="100" width="1504" height="1060" rx="12" fill="#fff" stroke="#333" stroke-width="1.7"/>
+<text x="800.0" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">SM_02 · Форма импорта</text>
+<path d="M 420 171 L 420 220" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 600 276 L 1000 276" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1180 332 L 1180 600" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1072 332 L 1072.0 412.0 Q 1072 420 1064.0 420.0 L 428.0 420.0 Q 420 420 420.0 428.0 L 420 600" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1180 712 L 1180 960" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1000 656 L 600 656" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1000 680 L 808.0 680.0 Q 800 680 800.0 688.0 L 800.0 984.0 Q 800 992 792.0 992.0 L 600 992" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 600 1040 L 1000 1040" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 420 960 L 420 712" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 300 600 L 300 332" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1100 1072 L 1100.0 1112.0 Q 1100 1120 1092.0 1120.0 L 108.0 1120.0 Q 100 1120 100.0 1112.0 L 100.0 284.0 Q 100 276 108.0 276.0 L 240 276" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<path d="M 1552 1104 L 1572.0 1104.0 Q 1580 1104 1580.0 1112.0 L 1580.0 1224.0 Q 1580 1232 1572.0 1232.0 L 1514 1232" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="624" y="210" width="312" height="58" fill="#fff"/>
+<text x="634" y="232" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">отправить</text>
+<text x="634" y="257" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ получить или сохранить requestId</text>
+<rect x="1200" y="452" width="194" height="33" fill="#fff"/>
+<text x="1210" y="474" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[проверка пройдена]</text>
+<rect x="632" y="368" width="219" height="33" fill="#fff"/>
+<text x="642" y="390" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[проверка не пройдена]</text>
+<rect x="1200" y="816" width="170" height="33" fill="#fff"/>
+<text x="1210" y="838" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">итогПодтверждён</text>
+<rect x="648" y="604" width="179" height="33" fill="#fff"/>
+<text x="658" y="626" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">отказПодтверждён</text>
+<rect x="820" y="764" width="191" height="58" fill="#fff"/>
+<text x="830" y="786" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">связь потеряна</text>
+<text x="830" y="811" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">или итог неизвестен</text>
+<rect x="648" y="1000" width="182" height="33" fill="#fff"/>
+<text x="658" y="1022" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">успехПодтверждён</text>
+<rect x="448" y="840" width="179" height="33" fill="#fff"/>
+<text x="458" y="862" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">отказПодтверждён</text>
+<rect x="132" y="464" width="130" height="58" fill="#fff"/>
+<text x="142" y="486" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">исправить</text>
+<text x="142" y="511" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ новый ключ</text>
+<rect x="612" y="1078" width="251" height="33" fill="#fff"/>
+<text x="622" y="1100" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">новыйИмпорт / новый ключ</text>
+<rect x="1040" y="1180" width="345" height="33" fill="#fff"/>
+<text x="1050" y="1202" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">закрыть [нет незавершённого запроса]</text>
+<circle cx="420" cy="160" r="11" fill="#222"/>
+<rect x="240" y="220" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="420.0" y="252" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Редактируется форма импорта</text>
+<line x1="240" y1="266" x2="600" y2="266" stroke="#888"/>
+<text x="420.0" y="294" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / открыть форму</text>
+<text x="420.0" y="318" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">изменение / обновить данные</text>
+<rect x="1000" y="220" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1180.0" y="252" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Проверяются данные</text>
+<line x1="1000" y1="266" x2="1360" y2="266" stroke="#888"/>
+<text x="1180.0" y="294" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">do / проверить права, ключ и файл</text>
+<rect x="1000" y="600" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1180.0" y="632" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Выполняется импорт</text>
+<line x1="1000" y1="646" x2="1360" y2="646" stroke="#888"/>
+<text x="1180.0" y="674" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">do / проверить и сохранить атомарно</text>
+<rect x="240" y="600" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="420.0" y="632" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Показаны ошибки</text>
+<line x1="240" y1="646" x2="600" y2="646" stroke="#888"/>
+<text x="420.0" y="674" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / показать подтверждённый отказ</text>
+<rect x="240" y="960" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="420.0" y="992" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Уточняется итог запроса</text>
+<line x1="240" y1="1006" x2="600" y2="1006" stroke="#888"/>
+<text x="420.0" y="1034" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">do / проверить итог по requestId</text>
+<text x="420.0" y="1058" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">after(пауза) / повторить с тем же ключом</text>
+<rect x="1000" y="960" width="360" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1180.0" y="992" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Показан результат импорта</text>
+<line x1="1000" y1="1006" x2="1360" y2="1006" stroke="#888"/>
+<text x="1180.0" y="1034" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / показать сохранённый итог</text>
+<circle cx="1500" cy="1232" r="14" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<circle cx="1500" cy="1232" r="9" fill="#222"/>
+<line x1="40" y1="1275" x2="1560" y2="1275" stroke="#bbb"/>
+<text x="800.0" y="1304" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#222">● — начало · ◉ — завершение · событие [условие] / действие — подпись перехода</text>
+<text x="800.0" y="1328" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#222">Неподписанная стрелка срабатывает по завершении поведения состояния.</text>
+</svg></div></main></body></html>

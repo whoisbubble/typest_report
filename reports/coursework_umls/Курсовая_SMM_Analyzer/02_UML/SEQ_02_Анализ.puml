@@ -2,44 +2,36 @@
 !include common.puml
 title Последовательность анализа комментариев
 
-actor "Сотрудник" as Employee
+actor "Аналитик" as Analyst
 boundary "Страница аналитики" as Page
 control "AnalysisService" as Service
-control "AccessPolicy" as Policy
-control "AnalysisWorker" as Worker
 participant "AnalysisProvider" as Provider
-database "PostgreSQL" as DB
+database "База данных" as DB
 
-Employee -> Page : запустить анализ публикации
-Page -> Service : run(publicationId)
-Service -> Policy : requireAnalyze(user, publication)
+Analyst -> Page : 1. Запустить анализ публикации
+Page -> Service : 2. Создать задание
+Service -> Service : 2.1. Проверить доступ и наличие данных
 
-alt нет доступа или нет комментариев
-  Policy --> Service : отказ
-  Service --> Page : операция отклонена
+alt анализ недоступен
+  Service --> Page : 3. Сообщить причину отказа
 else анализ разрешён
-  Policy --> Service : разрешено
-  Service -> DB : зафиксировать inputSnapshot и inputRevision
-  DB --> Service : jobId, QUEUED
-  Service --> Page : идентификатор задания
+  Service -> DB : 3. Зафиксировать версию комментариев
+  DB --> Service : 4. Снимок входных данных
+  Service -> Provider : 5. Проанализировать комментарии
 
-  ... асинхронная обработка ...
-  Worker -> DB : захватить задание и прочитать снимок
-  Worker -> Policy : проверить право инициатора
-  Worker -> Provider : analyze(snapshot, providerVersion)
-  alt ошибка провайдера
-    Provider --> Worker : ошибка
-    Worker -> DB : повторить позже или установить FAILED
-  else результат получен
-    Provider --> Worker : тональность и признаки
-    Worker -> Policy : повторная проверка перед записью
-    Worker -> DB : results + audit + SUCCEEDED в транзакции
+  alt ошибка модуля анализа
+    Provider --> Service : 6. Ошибка обработки
+    Service -> DB : 7. Сохранить FAILED
+  else анализ выполнен
+    Provider --> Service : 6. Тональность и признаки
+    Service -> DB : 7. Сохранить результат и аудит
   end
 
-  Page -> Service : getResults(jobId)
-  Service -> DB : результаты и текущая commentsRevision
-  DB --> Service : данные
-  Service --> Page : результаты + признак isStale
+  Analyst -> Page : 8. Открыть результаты
+  Page -> Service : 9. Получить результат
+  Service -> DB : 10. Прочитать результат и текущую версию
+  DB --> Service : 11. Данные и признак актуальности
+  Service --> Page : 12. Показать результат
 end
 @enduml
 

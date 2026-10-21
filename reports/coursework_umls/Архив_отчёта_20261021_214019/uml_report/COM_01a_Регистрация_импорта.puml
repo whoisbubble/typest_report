@@ -1,0 +1,18 @@
+@startuml
+!include common.puml
+left to right direction
+title Коммуникация объектов при регистрации импорта
+
+object "manager : Менеджер" as Manager
+object "page : Страница импорта" as Page
+object "service : ImportService" as Service
+object "db : База данных" as DB
+
+Manager -right-> Page : 1. выбрать файл
+Page -right-> Service : 2. submit(file)
+Service -down-> Service : 2.1. проверить доступ и формат
+Service -right-> DB : 2.2. createOrGetJob()
+DB -left-> Service : 2.3. jobId, status
+Service -left-> Page : 2.4. состояние задания
+Page -left-> Manager : 2.5. показать результат
+@enduml

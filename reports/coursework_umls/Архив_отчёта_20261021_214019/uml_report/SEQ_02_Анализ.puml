@@ -1,0 +1,37 @@
+@startuml
+!include common.puml
+title Последовательность анализа комментариев
+
+actor "Аналитик" as Analyst
+boundary "Страница аналитики" as Page
+control "AnalysisService" as Service
+participant "AnalysisProvider" as Provider
+database "База данных" as DB
+
+Analyst -> Page : 1. Запустить анализ публикации
+Page -> Service : 2. Создать задание
+Service -> Service : 2.1. Проверить доступ и наличие данных
+
+alt анализ недоступен
+  Service --> Page : 3. Сообщить причину отказа
+else анализ разрешён
+  Service -> DB : 3. Зафиксировать версию комментариев
+  DB --> Service : 4. Снимок входных данных
+  Service -> Provider : 5. Проанализировать комментарии
+
+  alt ошибка модуля анализа
+    Provider --> Service : 6. Ошибка обработки
+    Service -> DB : 7. Сохранить FAILED
+  else анализ выполнен
+    Provider --> Service : 6. Тональность и признаки
+    Service -> DB : 7. Сохранить результат и аудит
+  end
+
+  Analyst -> Page : 8. Открыть результаты
+  Page -> Service : 9. Получить результат
+  Service -> DB : 10. Прочитать результат и текущую версию
+  DB --> Service : 11. Данные и признак актуальности
+  Service --> Page : 12. Показать результат
+end
+@enduml
+

@@ -1,24 +1,18 @@
 @startuml
 !include common.puml
-left to right direction
+top to bottom direction
 title Коммуникация объектов при фоновой обработке импорта
 
-object "files : FileStore" as Files
-object "policy : AccessPolicy" as Policy
 object "worker : ImportWorker" as Worker
+object "files : FileStore" as Files
 object "validator : ImportValidator" as Validator
-object "db : PostgreSQL" as DB
+object "db : База данных" as DB
 
-Files -right-> Worker : 3.1: read()
-Policy -right-> Worker : 3.2: requireImport()
-Worker -right-> Validator : 3.3: validate()
-Worker -down-> DB : 3: claim()\n3.4: данные + аудит + COMMIT
-
-Files -[hidden]down-> Policy
-Validator -[hidden]down-> DB
-
-note bottom of Worker
-Рабочий процесс повторно проверяет право и состояние кампании.
-Данные, аудит и успешный статус фиксируются одной транзакцией.
-end note
+Worker -left-> Files : 3.1. read()
+Files -right-> Worker : 3.2. содержимое файла
+Worker -right-> Validator : 3.3. validate()
+Validator -left-> Worker : 3.4. результат проверки
+Worker -down-> Worker : 3.5. повторно проверить право
+Worker -down-> DB : 3.6. сохранить данные,
+Worker -down-> DB : аудит и итоговый статус
 @enduml

@@ -1,0 +1,19 @@
+@startuml
+!include common.puml
+left to right direction
+title Коммуникация объектов при публикации отчёта
+
+object "manager : Менеджер" as Manager
+object "page : Страница отчёта" as Page
+object "service : ReportService" as Service
+object "db : База данных" as DB
+
+Manager -right-> Page : 1. опубликовать черновик
+Page -right-> Service : 2. publish(id, version)
+Service -down-> Service : 2.1. проверить доступ,
+Service -down-> Service : версию и источники
+Service -right-> DB : 2.2. сохранить PUBLISHED и аудит
+DB -left-> Service : 2.3. подтверждение
+Service -left-> Page : 2.4. результат публикации
+Page -left-> Manager : 2.5. показать результат
+@enduml

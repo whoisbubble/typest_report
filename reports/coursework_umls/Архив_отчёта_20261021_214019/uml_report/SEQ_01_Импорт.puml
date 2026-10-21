@@ -1,0 +1,40 @@
+@startuml
+!include common.puml
+title Последовательность импорта статистики и комментариев
+
+actor "SMM-менеджер" as Manager
+boundary "Страница импорта" as Page
+control "ImportService" as Service
+control "ImportWorker" as Worker
+database "База данных" as DB
+
+Manager -> Page : 1. Выбрать публикацию и файл
+Page -> Service : 2. Отправить файл
+Service -> Service : 2.1. Проверить доступ и формат
+
+alt запрос отклонён
+  Service --> Page : 3. Сообщить причину отказа
+  Page --> Manager : 4. Показать ошибку
+else запрос принят
+  Service -> DB : 3. Создать задание импорта
+  DB --> Service : 4. Идентификатор задания
+  Service --> Page : 5. Показать состояние «Ожидает»
+
+  ... фоновая обработка ...
+  Worker -> DB : 6. Получить ожидающее задание
+  Worker -> Worker : 7. Проверить файл и права
+  alt файл содержит ошибки
+    Worker -> DB : 8. Сохранить статус FAILED
+  else файл корректен
+    Worker -> DB : 8. Сохранить метрики, комментарии,
+    Worker -> DB : аудит и статус SUCCEEDED
+  end
+
+  Manager -> Page : 9. Запросить результат
+  Page -> Service : 10. Получить состояние задания
+  Service -> DB : 11. Прочитать итог
+  DB --> Service : 12. Статус и сводка
+  Service --> Page : 13. Результат импорта
+end
+@enduml
+

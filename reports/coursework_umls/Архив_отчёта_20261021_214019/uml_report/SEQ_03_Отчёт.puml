@@ -1,0 +1,35 @@
+@startuml
+!include common.puml
+title Последовательность публикации и просмотра отчёта
+
+actor "SMM-менеджер" as Manager
+actor "Заказчик" as Customer
+boundary "Страница отчёта" as Page
+control "ReportService" as Service
+database "База данных" as DB
+
+Manager -> Page : 1. Опубликовать черновик
+Page -> Service : 2. Передать отчёт и его версию
+Service -> Service : 2.1. Проверить полномочия и источники
+
+alt публикация невозможна
+  Service --> Page : 3. Вернуть причину отказа
+else проверки успешны
+  Service -> Service : 3. Сформировать клиентскую версию
+  Service -> DB : 4. Сохранить PUBLISHED и аудит
+  DB --> Service : 5. Публикация подтверждена
+  Service --> Page : 6. Показать успешный результат
+end
+
+Customer -> Page : 7. Открыть опубликованный отчёт
+Page -> Service : 8. Запросить клиентскую версию
+Service -> Service : 8.1. Проверить доступ заказчика
+alt доступ разрешён
+  Service -> DB : 9. Прочитать опубликованную версию
+  DB --> Service : 10. Данные отчёта
+  Service --> Page : 11. Показать отчёт
+else доступа нет
+  Service --> Page : 9. Отказать без раскрытия данных
+end
+@enduml
+
