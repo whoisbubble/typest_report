@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1120" role="img" aria-labelledby="05_SM_context-title 05_SM_context-desc" id="d-05_SM_context-root">
-<title id="05_SM_context-title">Контекстный автомат интерфейса</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1600" role="img" aria-labelledby="05_SM_context-title 05_SM_context-desc" id="d-05_SM_context-root">
+<title id="05_SM_context-title">Контекстный автомат интерфейса работы с кампанией</title>
 <desc id="05_SM_context-desc">Состояния интерфейса SMM Analyzer, допустимые переходы, условия и возвраты.</desc>
 <defs>
       <style>#d-05_SM_context-root { color: #222; font-family: Arial,sans-serif; }
@@ -8,64 +8,92 @@
       @media print {
 #d-05_SM_context-root .diagram-container { overflow-x:visible }
 }</style><marker id="d-05_SM_context-arrow" markerWidth="12" markerHeight="12" refX="11" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L11 6 L1 11" fill="none" stroke="#222" stroke-width="1.8"/></marker></defs>
-<rect width="1800" height="1120" fill="#fff"/>
-<rect x="48" y="120" width="1704" height="820" rx="12" fill="#fff" stroke="#333" stroke-width="1.7"/>
-<text x="900.0" y="152" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Рабочая область · действующий сеанс пользователя</text>
-<path d="M 900 195 L 900 240" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 268 352 L 268 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 332 680 L 332 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 668 352 L 668 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 732 680 L 732 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 1068 352 L 1068 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 1132 680 L 1132 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 1468 352 L 1468 680" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 1532 680 L 1532 352" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<path d="M 1752 880 L 1768.0 880.0 Q 1776 880 1776.0 888.0 L 1776.0 995.0 Q 1776 1000 1771.0 1000.0 L 1766 1000" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
-<rect x="62" y="448" width="149" height="58" fill="#fff"/>
-<text x="72" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(данные)</text>
-<text x="72" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
-<rect x="348" y="552" width="148" height="33" fill="#fff"/>
-<text x="358" y="574" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">закрытьРаздел</text>
-<rect x="462" y="448" width="145" height="58" fill="#fff"/>
-<text x="472" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(импорт)</text>
-<text x="472" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
-<rect x="862" y="448" width="143" height="58" fill="#fff"/>
-<text x="872" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(отчёты)</text>
-<text x="872" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
-<rect x="1262" y="448" width="164" height="58" fill="#fff"/>
-<text x="1272" y="470" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(просмотр)</text>
-<text x="1272" y="495" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[разрешено]</text>
-<rect x="1548" y="552" width="148" height="33" fill="#fff"/>
-<text x="1558" y="574" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">закрытьРаздел</text>
-<rect x="1392" y="956" width="196" height="58" fill="#fff"/>
-<text x="1402" y="978" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">выйти [можно выйти]</text>
-<text x="1402" y="1003" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ завершить сеанс</text>
-<circle cx="900" cy="184" r="11" fill="#222"/>
-<rect x="120" y="240" width="1560" height="112" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
-<text x="900.0" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Ожидается выбор раздела</text>
-<line x1="120" y1="286" x2="1680" y2="286" stroke="#888"/>
-<text x="900.0" y="314" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">выбор(раздел) [нет прав] / показать отказ</text>
-<rect x="144" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
-<text x="300.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел данных</text>
-<line x1="144" y1="726" x2="456" y2="726" stroke="#888"/>
-<text x="300.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">кампании · финансы · доступ</text>
-<rect x="544" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
-<text x="700.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел импорта</text>
-<line x1="544" y1="726" x2="856" y2="726" stroke="#888"/>
-<text x="700.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">подавтомат SM_02</text>
-<g stroke="#333" fill="none"><circle cx="818" cy="792" r="4"/><circle cx="838" cy="792" r="4"/><path d="M822 792 h12"/></g>
-<rect x="944" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
-<text x="1100.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт раздел отчётов</text>
-<line x1="944" y1="726" x2="1256" y2="726" stroke="#888"/>
-<text x="1100.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">подавтомат SM_03</text>
-<g stroke="#333" fill="none"><circle cx="1218" cy="792" r="4"/><circle cx="1238" cy="792" r="4"/><path d="M1222 792 h12"/></g>
-<rect x="1344" y="680" width="312" height="128" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
-<text x="1500.0" y="712" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Открыт просмотр результатов</text>
-<line x1="1344" y1="726" x2="1656" y2="726" stroke="#888"/>
-<text x="1500.0" y="754" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">аналитика · кабинет заказчика</text>
-<circle cx="1752" cy="1000" r="14" fill="#fff" stroke="#222" stroke-width="1.6"/>
-<circle cx="1752" cy="1000" r="9" fill="#222"/>
-<line x1="40" y1="1055" x2="1760" y2="1055" stroke="#bbb"/>
-<text x="900.0" y="1084" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#222">● — начало · ◉ — завершение · событие [условие] / действие — подпись перехода</text>
-<text x="900.0" y="1108" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#222">Неподписанная стрелка срабатывает по завершении поведения состояния.</text>
+<rect width="2000" height="1600" fill="#fff"/>
+<rect x="20" y="50" width="1960" height="1400" rx="12" fill="#fff" stroke="#333" stroke-width="1.7"/>
+<text x="1000.0" y="82" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Рабочий цикл сотрудника · выбранная кампания · действующий сеанс</text>
+<path d="M 900 121 L 900 170" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1020 305 L 1020 450" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 780 450 L 780 305" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 650 490 L 480 490" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 480 550 L 650 550" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 900 585 L 900 780" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 760 780 L 760 585" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1120 780 L 1120.0 718.0 Q 1120 710 1128.0 710.0 L 1507.0 710.0 Q 1515 710 1515.0 718.0 L 1515 780" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1430 940 L 1430 1120" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1630 1120 L 1630 940" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1290 900 L 1178.0 900.0 Q 1170 900 1170.0 908.0 L 1170.0 1042.0 Q 1170 1050 1162.0 1050.0 L 908.0 1050.0 Q 900 1050 900.0 1058.0 L 900 1120" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 1515 1270 L 1515.0 1332.0 Q 1515 1340 1507.0 1340.0 L 908.0 1340.0 Q 900 1340 900.0 1332.0 L 900 1270" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 650 1200 L 48.0 1200.0 Q 40 1200 40.0 1192.0 L 40.0 243.0 Q 40 235 48.0 235.0 L 650 235" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<path d="M 650 1240 L 508.0 1240.0 Q 500 1240 500.0 1248.0 L 500.0 1472.0 Q 500 1480 508.0 1480.0 L 1866 1480" fill="none" stroke="#222" stroke-width="1.6" marker-end="url(#d-05_SM_context-arrow)"/>
+<rect x="1050" y="342" width="212" height="58" fill="#fff"/>
+<text x="1060" y="364" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[кампания выбрана]</text>
+<text x="1060" y="389" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ установить кампанию</text>
+<rect x="550" y="320" width="178" height="33" fill="#fff"/>
+<text x="560" y="342" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[запрошена смена]</text>
+<rect x="408" y="370" width="177" height="58" fill="#fff"/>
+<text x="418" y="392" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[запрошен импорт]</text>
+<text x="418" y="417" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">SM_02</text>
+<rect x="925" y="660" width="176" height="33" fill="#fff"/>
+<text x="935" y="682" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[запрошен анализ]</text>
+<rect x="510" y="686" width="198" height="33" fill="#fff"/>
+<text x="520" y="708" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[ожидание отменено]</text>
+<rect x="1190" y="657" width="194" height="33" fill="#fff"/>
+<text x="1200" y="679" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[результат актуален]</text>
+<rect x="1190" y="965" width="162" height="58" fill="#fff"/>
+<text x="1200" y="987" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[запрошен отчёт]</text>
+<text x="1200" y="1012" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">SM_03</text>
+<rect x="1650" y="1010" width="177" height="33" fill="#fff"/>
+<text x="1660" y="1032" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[нет новой версии]</text>
+<rect x="845" y="968" width="310" height="33" fill="#fff"/>
+<text x="855" y="990" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[выбрана опубликованная версия]</text>
+<rect x="1050" y="1345" width="185" height="33" fill="#fff"/>
+<text x="1060" y="1367" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[есть новая версия]</text>
+<rect x="80" y="1070" width="269" height="33" fill="#fff"/>
+<text x="90" y="1092" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[запрошена другая кампания]</text>
+<rect x="1310" y="1390" width="341" height="58" fill="#fff"/>
+<text x="1320" y="1412" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">[завершение запрошено и разрешено]</text>
+<text x="1320" y="1437" text-anchor="start" font-family="Arial, sans-serif" font-size="18" fill="#222">/ закрыть рабочую область</text>
+<circle cx="900" cy="110" r="11" fill="#222"/>
+<rect x="650" y="170" width="500" height="135" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="900.0" y="202" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Выбирается кампания</text>
+<line x1="650" y1="216" x2="1150" y2="216" stroke="#888"/>
+<text x="900.0" y="244" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / показать доступные кампании</text>
+<rect x="650" y="450" width="500" height="135" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="900.0" y="482" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Изучаются данные кампании</text>
+<line x1="650" y1="496" x2="1150" y2="496" stroke="#888"/>
+<text x="900.0" y="524" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / загрузить публикации и метрики</text>
+<text x="900.0" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">обновить / перечитать данные</text>
+<rect x="60" y="450" width="420" height="135" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="270.0" y="482" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Импортируются данные</text>
+<line x1="60" y1="496" x2="480" y2="496" stroke="#888"/>
+<text x="270.0" y="524" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / открыть форму импорта</text>
+<text x="270.0" y="548" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">exit / перечитать данные кампании</text>
+<g stroke="#333" fill="none"><circle cx="442" cy="569" r="4"/><circle cx="462" cy="569" r="4"/><path d="M446 569 h12"/></g>
+<rect x="650" y="780" width="500" height="160" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="900.0" y="812" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Ожидается актуальный анализ</text>
+<line x1="650" y1="826" x2="1150" y2="826" stroke="#888"/>
+<text x="900.0" y="854" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / прочитать версии данных</text>
+<text x="900.0" y="878" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">do / ожидать актуальные результаты</text>
+<text x="900.0" y="902" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">exit / остановить опрос статуса</text>
+<rect x="1290" y="780" width="450" height="160" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1515.0" y="812" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Изучаются результаты анализа</text>
+<line x1="1290" y1="826" x2="1740" y2="826" stroke="#888"/>
+<text x="1515.0" y="854" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / показать оценки и графики</text>
+<text x="1515.0" y="878" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">источникиИзменились / отметить устаревание</text>
+<rect x="1290" y="1120" width="450" height="150" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="1515.0" y="1152" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Готовится отчёт</text>
+<line x1="1290" y1="1166" x2="1740" y2="1166" stroke="#888"/>
+<text x="1515.0" y="1194" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / открыть рабочую версию</text>
+<text x="1515.0" y="1218" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">exit / обновить список публикаций</text>
+<g stroke="#333" fill="none"><circle cx="1702" cy="1254" r="4"/><circle cx="1722" cy="1254" r="4"/><path d="M1706 1254 h12"/></g>
+<rect x="650" y="1120" width="500" height="150" rx="8" fill="#fff" stroke="#222" stroke-width="1.7"/>
+<text x="900.0" y="1152" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" fill="#222">Просматривается версия отчёта</text>
+<line x1="650" y1="1166" x2="1150" y2="1166" stroke="#888"/>
+<text x="900.0" y="1194" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">entry / загрузить опубликованный снимок</text>
+<text x="900.0" y="1218" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" fill="#222">exit / закрыть представление версии</text>
+<circle cx="1880" cy="1480" r="14" fill="#fff" stroke="#222" stroke-width="1.6"/>
+<circle cx="1880" cy="1480" r="9" fill="#222"/>
+<line x1="40" y1="1535" x2="1960" y2="1535" stroke="#bbb"/>
+<text x="1000.0" y="1564" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#222">● — начало · ◉ — завершение · событие [условие] / действие — подпись перехода</text>
+<text x="1000.0" y="1588" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#222">Условия действий пользователя — сокращённая запись событий изменения when(...).</text>
 </svg>

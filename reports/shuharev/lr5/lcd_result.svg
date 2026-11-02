@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="300" viewBox="0 0 900 300">
+  <rect width="900" height="300" rx="26" fill="#1d2b24"/>
+  <rect x="55" y="45" width="790" height="210" rx="14" fill="#a9c676" stroke="#d5e6a7" stroke-width="8"/>
+  <g fill="#23351f" font-family="Consolas, monospace" font-size="70" font-weight="700">
+    <text x="95" y="130">T=0.07s TIM3</text>
+    <text x="95" y="220">U=1.650 V</text>
+  </g>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+  <rect width="900" height="520" fill="white"/>
+  <g font-family="Arial" fill="#263238">
+    <text x="450" y="35" text-anchor="middle" font-size="26" font-weight="bold">Зависимость Kг от одинаковой готовности рёбер p</text>
+    <line x1="105" y1="430" x2="825" y2="430" stroke="#263238" stroke-width="3"/>
+    <line x1="105" y1="430" x2="105" y2="70" stroke="#263238" stroke-width="3"/>
+    <text x="835" y="438" font-size="22">p</text>
+    <text x="72" y="68" font-size="22">Kг</text>
+
+    <g stroke="#cfd8dc" stroke-width="1">
+      <line x1="105" y1="370" x2="825" y2="370"/><line x1="105" y1="310" x2="825" y2="310"/>
+      <line x1="105" y1="250" x2="825" y2="250"/><line x1="105" y1="190" x2="825" y2="190"/>
+      <line x1="105" y1="130" x2="825" y2="130"/>
+    </g>
+    <g font-size="18" text-anchor="end">
+      <text x="95" y="436">0</text><text x="95" y="376">0,2</text><text x="95" y="316">0,4</text>
+      <text x="95" y="256">0,6</text><text x="95" y="196">0,8</text><text x="95" y="136">1,0</text>
+    </g>
+    <g font-size="18" text-anchor="middle">
+      <text x="225" y="462">0,6</text><text x="405" y="462">0,7</text>
+      <text x="585" y="462">0,8</text><text x="765" y="462">0,9</text>
+    </g>
+
+    <!-- y = p^3 + p^4 - p^5; y-coordinate = 430 - 300*y -->
+    <polyline points="225,349.65 405,305.49 585,251.82 765,191.62" fill="none" stroke="#1565c0" stroke-width="6"/>
+    <g fill="#1565c0" stroke="white" stroke-width="3">
+      <circle cx="225" cy="349.65" r="9"/><circle cx="405" cy="305.49" r="9"/>
+      <circle cx="585" cy="251.82" r="9"/><circle cx="765" cy="191.62" r="9"/>
+    </g>
+    <g font-size="19" fill="#0d47a1" text-anchor="middle" font-weight="bold">
+      <text x="225" y="328">0,26784</text><text x="405" y="284">0,41503</text>
+      <text x="585" y="230">0,59392</text><text x="765" y="170">0,79461</text>
+    </g>
+    <text x="450" y="500" text-anchor="middle" font-size="20">Аналитическая зависимость: Kг = p³ + p⁴ − p⁵</text>
+  </g>
+</svg>
